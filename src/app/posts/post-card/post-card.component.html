@@ -1,0 +1,23 @@
+
+
+
+@for (post of posts; track $index) {
+  
+<article class="post-item">
+  @if(isLoading){
+    <app-loader/>
+  } @else {
+  <h2 class="post-title">{{ post.themeId.themeName }}</h2>
+  <p [class.truncated-text]="isTruncated" class="post-content">{{ post.content }}</p>
+  <div class="post-footer">
+    <span class="post-author">{{ post.userId.username}}</span>
+    <span class="post-date">{{ post.created_at}}</span>
+    <a (click)="togglePost()" class="read-more">
+      {{ isTruncated ? 'Read more' : 'Read less' }}
+    </a>
+  </div>
+  
+}
+</article>
+  
+}

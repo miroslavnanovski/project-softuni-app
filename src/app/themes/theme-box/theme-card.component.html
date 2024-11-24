@@ -1,0 +1,9 @@
+<h1>Themes</h1>
+<div class="popular-themes">
+@for (theme of themes; track $index) {
+
+  <div class="theme-box">
+      <a [routerLink]="['/themes', theme._id]"><p>{{theme.themeName}}</p></a>
+  </div>
+}
+</div>

@@ -1,0 +1,44 @@
+<!-- create-post.component.html -->
+<div class="create-post-container">
+    <h2>Create a New Post</h2>
+    
+    <!-- Form for creating a post -->
+    <form>
+      
+      <!-- Post Title -->
+      <div class="form-group">
+        <label for="title">Post Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control"
+          required
+          minlength="3"
+          placeholder="Enter post title"
+        />
+      </div>
+      
+      <!-- Post Body -->
+      <div class="form-group">
+        <label for="body">Post Body</label>
+        <textarea
+          id="body"
+          name="body"
+          class="form-control"
+          required
+          minlength="10"
+          rows="5"
+          placeholder="Write your post content here"
+        ></textarea>
+      </div>
+      
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >
+        Create Post
+      </button>
+    </form>
+  </div>

@@ -1,0 +1,71 @@
+/* General body styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Main container that holds the entire page */
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  /* Header styles */
+  .about-header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .about-header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  /* Main content container */
+  .about-main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+  /* About section styling */
+  .about-content {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-content h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .about-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
+  /* Footer styles */
+  .about-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
+  

@@ -1,0 +1,22 @@
+<div class="current-theme">
+    <h2>{{theme.themeName}}</h2>
+    <span>Subscribers: {{theme.subscribers?.length || 0}}</span>
+
+    @for (post of theme.posts; track $index) {
+    <div class="posts">
+      <div class="post">
+        <h3 class="post-title">{{ post.text }}</h3>
+        <p class="post-content">{{ post.content }}</p>
+  
+        <div class="post-info">
+          <span class="post-date">Posted on: {{ post.created_at }}</span>
+          <span class="post-likes">Likes: {{ post.likes?.length || 0 }}</span>
+        </div>
+      </div>
+    </div>
+  }
+  <div class="btn-holder">
+  <a class="back-btn" routerLink="/home">Back</a>
+</div>
+    </div>
+   

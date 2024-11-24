@@ -1,0 +1,31 @@
+.popular-themes {
+display: flex;
+justify-content: space-between;
+}
+
+.theme-box {
+    background-color: #007bff;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+}
+
+.theme-box:hover {
+    cursor: pointer;
+    background-color: #aeafaf;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

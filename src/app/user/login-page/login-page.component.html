@@ -1,0 +1,39 @@
+<div class="container-holder">
+<div class="login-container">
+    <h2>Login</h2>
+  
+    <!-- Login Form -->
+    <form>
+      
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter email"
+          #inputEmail
+        />
+        
+      </div>
+  
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter password"
+          #inputPassword
+        />
+      </div>
+  
+      <!-- Submit Button -->
+      <button (click)="login($event,inputEmail.value,inputPassword.value)">Login</button>
+    </form>
+  </div>
+
+</div>
+  

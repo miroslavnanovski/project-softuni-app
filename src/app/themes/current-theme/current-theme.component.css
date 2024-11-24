@@ -1,0 +1,63 @@
+.current-theme {
+  margin: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.posts {
+  margin-top: 1rem;
+}
+
+.post {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+.post-title {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.post-content {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+
+.post-info {
+  font-size: 0.9rem;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-date, .post-likes {
+  font-style: italic;
+}
+
+.btn-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-btn {
+  text-decoration: none;
+  font-size: 24px;
+  background: black;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+}

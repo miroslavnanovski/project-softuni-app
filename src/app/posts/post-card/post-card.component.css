@@ -1,0 +1,54 @@
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-item {
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: box-shadow 0.3s;
+}
+
+.post-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin: 0;
+}
+
+.post-content {
+  margin: 12px 0;
+  color: #555;
+  width: 900px;
+}
+
+.post-footer {
+  display: flex;
+  gap:20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.truncated-text {
+  white-space: nowrap;      /* Prevents text from wrapping to a new line */
+  overflow: hidden;         /* Hides overflowed text */
+  text-overflow: ellipsis;  /* Adds an ellipsis (...) */
+  width: 900px;             /* Set a fixed width for the element */
+}
+
+.read-more {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+ 
+}
+
+.read-more:hover {
+  color: #0056b3;
+}

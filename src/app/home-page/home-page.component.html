@@ -1,0 +1,36 @@
+
+<div class="welcome-message">
+    @if(isLoggedIn){
+        <h2>Welcome, {{firstName}}!</h2>
+    } @else {
+        <h2>Welcome!</h2>
+    }
+    
+    <p>
+        Join discussions, ask questions, and share your thoughts. Explore different themes and engage with the community.
+    </p>
+</div>
+<div class="cards-holder">
+<app-home-cards
+[value]="'12145'"
+[title]="'Current likes'"
+[icon]="''"
+[backgroundColor]="'#963eff'"/>
+
+<app-home-cards
+[value]="'31145'"
+[title]="'Current themes'"
+[icon]="''"
+[backgroundColor]="'#33ccff'"/>
+
+<app-home-cards
+[value]="'13545'"
+[title]="'Current users'"
+[icon]="''"
+[backgroundColor]="'#1fe592'"/>
+</div>
+
+@if (isLoggedIn) {
+    <app-create-post/>
+}
+

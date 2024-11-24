@@ -1,0 +1,100 @@
+    .user-container {
+        width: 250px;
+        background: white;
+        padding: 15px;
+    }
+
+  .user-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .profile-info h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .profile-info p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+  }
+  
+  .theme-toggle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .theme-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-button.active {
+    background-color: #f0f0f0;
+  }
+  
+  .theme-button i {
+    font-size: 18px;
+  }
+  
+  .profile-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .profile-menu li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .profile-menu li:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .profile-menu i {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .logout-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #d9534f;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .logout-button i {
+    margin-right: 10px;
+    font-size: 18px;
+  }
