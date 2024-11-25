@@ -1,50 +1,88 @@
+/* General container styling for the registration form */
 .register-container {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  button[disabled] {
-    background-color: #aaa;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.875rem;
-  }
-  
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.register-container h2 {
+  margin-bottom: 20px;
+  color: #333333;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Form group styling for registration form */
+.register-container .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.register-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555555;
+}
+
+.register-container .form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.register-container .form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Small text for telephone format */
+.register-container .form-group small {
+  display: block;
+  margin-top: 5px;
+  color: #888888;
+  font-size: 0.85rem;
+}
+
+/* Button styling for the register form */
+.register-container button {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+small {
+  font-style: italic;
+}
+
+small.gray {
+  color: gray!important;
+}
+
+small.invalid {
+  color: red!important;
+}
+
+small.valid {
+  color: green!important;
+}

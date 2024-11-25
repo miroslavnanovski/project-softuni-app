@@ -1,21 +1,25 @@
-<div class="container-holder">
 <div class="login-container">
     <h2>Login</h2>
-  
-    <!-- Login Form -->
-    <form>
-      
+    <form #form="ngForm" (ngSubmit)="login(form)">
       <!-- Email Field -->
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email"
           id="email"
-          formControlName="email"
+          name="email"
+          ngModel
+          required
+          validEmail
           placeholder="Enter email"
-          #inputEmail
+          #email="ngModel"
         />
-        
+        <small class="red" *ngIf="email.errors?.['invalidEmail'] && email.touched">
+          Please enter a valid email address (e.g., userexample.com).
+        </small>
+        <small class="red" *ngIf="email.errors?.['required'] && email.touched">
+          Email is required.
+        </small>
       </div>
   
       <!-- Password Field -->
@@ -24,16 +28,24 @@
         <input
           type="password"
           id="password"
-          formControlName="password"
+          name="password"
+          ngModel
+          required
+          validPassword
           placeholder="Enter password"
-          #inputPassword
+          #password="ngModel"
         />
+        <small class="red" *ngIf="password.errors?.['invalidPassword']&& password.touched">
+          Password should be at least 8 characters long, contain a capital letter, and a number.
+        </small>
+        <small class="red" *ngIf="password.errors?.['required'] && password.touched">
+          Password is required.
+        </small>
       </div>
   
       <!-- Submit Button -->
-      <button (click)="login($event,inputEmail.value,inputPassword.value)">Login</button>
+      <button [disabled]="form.invalid"
+      [ngClass]="{ 'disabled-button': form.invalid }"
+      >Login</button>
     </form>
   </div>
-
-</div>
-  

@@ -1,56 +1,86 @@
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .container-holder {
+/* General container styling */
+.container-holder {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
   }
   
-  h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
+  /* Login form container */
+  .login-container {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    text-align: center;
   }
   
+  .red {
+    color: red;
+  }
+
+  .login-container h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555555;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Button styling */
   button {
     width: 100%;
-    padding: 0.75rem;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
     background-color: #007bff;
-    color: #fff;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
   }
   
-  button[disabled] {
-    background-color: #aaa;
+  button:hover {
+    background-color: #0056b3;
   }
-  
-  .error {
-    color: red;
-    font-size: 0.875rem;
-  }
-  
+
+
+
+.disabled-button {
+  background-color: #d3d3d3; 
+  color: #a1a1a1; 
+  cursor: not-allowed; 
+  border: 1px solid #ccc;
+}

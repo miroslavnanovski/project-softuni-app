@@ -5,11 +5,11 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { RegisterPageComponent } from './user/register-page/register-page.component';
-import { LoginPageComponent } from './user/login-page/login-page.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { CurrentThemeComponent } from './themes/current-theme/current-theme.component';
 import { ThemesPageComponent } from './themes-page/themes-page.component';
 import { CreateThemeComponent } from './themes/create-theme/create-theme.component';
+import { LoginPageComponent } from './user/login-page/login-page.component';
 
 export const routes: Routes = [
     {path:'', redirectTo: '/home', pathMatch:'full'},
