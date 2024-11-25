@@ -1,3 +1,4 @@
+<div class="container-holder">
 <div class="login-container">
     <h2>Login</h2>
     <form #form="ngForm" (ngSubmit)="login(form)">
@@ -15,7 +16,7 @@
           #email="ngModel"
         />
         <small class="red" *ngIf="email.errors?.['invalidEmail'] && email.touched">
-          Please enter a valid email address (e.g., userexample.com).
+          Please enter a valid email address (e.g., user&#64;example.com).
         </small>
         <small class="red" *ngIf="email.errors?.['required'] && email.touched">
           Email is required.
@@ -49,3 +50,5 @@
       >Login</button>
     </form>
   </div>
+
+</div>

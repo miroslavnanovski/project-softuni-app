@@ -16,13 +16,21 @@ import { PasswordValidatorDirective } from '../../directives/password.directive'
 })
 
 export class LoginPageComponent {
+
+  constructor(private userService:userService, private router: Router){}
+
   login(form: NgForm) {
     if (form.valid) {
       console.log('Form Submitted:', form.value);
     } else {
       console.log('Form is invalid.');
     }
+
+    this.userService.login();
+    this.router.navigate(['/home'])
   }
+
+  
 }
 
 
