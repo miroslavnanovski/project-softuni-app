@@ -10,6 +10,7 @@ import { CurrentThemeComponent } from './themes/current-theme/current-theme.comp
 import { ThemesPageComponent } from './themes-page/themes-page.component';
 import { CreateThemeComponent } from './themes/create-theme/create-theme.component';
 import { LoginPageComponent } from './user/login-page/login-page.component';
+import { ProfileSettingsComponent } from './user/user-profile/profile-settings/profile-settings.component';
 
 export const routes: Routes = [
     {path:'', redirectTo: '/home', pathMatch:'full'},
@@ -25,7 +26,8 @@ export const routes: Routes = [
             {path:':themeId', component:CurrentThemeComponent},
         ]
     },
-    {path:'create-theme', component:CreateThemeComponent}
+    {path:'create-theme', component:CreateThemeComponent},
+    {path:'profile-settings', component:ProfileSettingsComponent}
     // {path:'404',component:ErrorComponent},
     // {path: '**', redirectTo:'/404'}
 

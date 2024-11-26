@@ -1,0 +1,47 @@
+
+@if(!isEdited){
+<div class="profile-view">
+    <div class="profile-image">
+      <img src="/images/1_PiHoomzwh9Plr9_GA26JcA.png" alt="Profile Picture" />
+    </div>
+    <div class="profile-header">
+      <h1>Profile</h1>
+    </div>
+    <div class="profile-details">
+      <p><strong>Username:</strong> John Doe</p>
+      <p><strong>Email:</strong> john.doe&#64;example.com</p>
+      <p><strong>Telephone:</strong> +123456789</p>
+    </div>
+    <button class="edit-button" (click)="toggleEdit()">Edit Profile</button>
+  </div>
+  
+} @else {
+    <div class="profile-view">
+        <div class="profile-image">
+          <img src="/images/1_PiHoomzwh9Plr9_GA26JcA.png" alt="Profile Picture" />
+        </div>
+        <div class="profile-header">
+          <h1>Profile</h1>
+        </div>
+        <div class="profile-details">
+            <form [formGroup]="editForm" (submit)="saveChanges()">
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" id="username" name="username" formControlName="username" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" formControlName="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Telephone:</label>
+                  <input type="text" formControlName="telephone">
+                </div>
+                <button type="submit" class="save-button">Save</button>
+                <button class="save-button cancel" (click)="toggleEdit()">Cancel</button>
+              </form>
+        </div>
+      </div>
+}
+
+

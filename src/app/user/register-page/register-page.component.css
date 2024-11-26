@@ -86,3 +86,7 @@ small.invalid {
 small.valid {
   color: green!important;
 }
+
+.areNotMatching {
+  color:red;
+}
