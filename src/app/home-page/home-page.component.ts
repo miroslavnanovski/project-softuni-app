@@ -22,7 +22,7 @@ export class HomePageComponent {
   }
 
   get firstName():string {
-    return this.userService.user?.firstName || '';
+    return this.userService.user?.username || '';
   }
 
 }

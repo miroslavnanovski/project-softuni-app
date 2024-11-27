@@ -11,6 +11,7 @@ import { ThemesPageComponent } from './themes-page/themes-page.component';
 import { CreateThemeComponent } from './themes/create-theme/create-theme.component';
 import { LoginPageComponent } from './user/login-page/login-page.component';
 import { ProfileSettingsComponent } from './user/user-profile/profile-settings/profile-settings.component';
+import { ChangePasswordComponent } from './user/user-profile/change-password/change-password.component';
 
 export const routes: Routes = [
     {path:'', redirectTo: '/home', pathMatch:'full'},
@@ -27,7 +28,8 @@ export const routes: Routes = [
         ]
     },
     {path:'create-theme', component:CreateThemeComponent},
-    {path:'profile-settings', component:ProfileSettingsComponent}
+    {path:'profile-settings', component:ProfileSettingsComponent},
+    {path:'change-password', component:ChangePasswordComponent}
     // {path:'404',component:ErrorComponent},
     // {path: '**', redirectTo:'/404'}
 

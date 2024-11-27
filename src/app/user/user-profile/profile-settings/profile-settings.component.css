@@ -119,10 +119,24 @@
     background-color: #0056b3;
   }
 
-  .cancel {
+  .cancel-button {
     margin-top: 20px;
+    background-color: red;
+    display: block;
+    width: 100%;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
   }
 
   label {
     margin-right: 10px;
+  }
+
+  .cancel-button:hover {
+    background-color: rgb(138, 14, 14);
   }
