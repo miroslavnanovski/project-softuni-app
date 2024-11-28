@@ -16,6 +16,7 @@ export class PasswordValidatorDirective implements Validator {
   validate(control: AbstractControl): { [key: string]: any } | null {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     const valid = passwordRegex.test(control.value);
+
     return valid ? null : { invalidPassword: true };
   }
 }

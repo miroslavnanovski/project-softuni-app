@@ -71,22 +71,7 @@
   background-color: #0056b3;
 }
 
-small {
-  font-style: italic;
-}
-
-small.gray {
-  color: gray!important;
-}
-
-small.invalid {
-  color: red!important;
-}
-
-small.valid {
-  color: green!important;
-}
 
 .areNotMatching {
-  color:red;
+  color: red !important;;
 }

@@ -9,6 +9,7 @@ import { RegisterPageComponent } from './user/register-page/register-page.compon
 import { LoginPageComponent } from './user/login-page/login-page.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { CreateThemeComponent } from './themes/create-theme/create-theme.component';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 
 
@@ -16,7 +17,7 @@ import { CreateThemeComponent } from './themes/create-theme/create-theme.compone
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, HeaderComponent,HomePageComponent,AboutPageComponent,PostBoxComponent,RegisterPageComponent,LoginPageComponent,ErrorComponent,CreateThemeComponent],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent,HomePageComponent,AboutPageComponent,PostBoxComponent,RegisterPageComponent,LoginPageComponent,ErrorComponent,CreateThemeComponent,AuthenticateComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

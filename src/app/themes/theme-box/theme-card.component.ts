@@ -19,6 +19,7 @@ export class ThemeCardComponent {
   ngOnInit(){
     this.apiService.getThemes().subscribe((themes) => {
       this.themes = themes;
+      
     })
   }
 }

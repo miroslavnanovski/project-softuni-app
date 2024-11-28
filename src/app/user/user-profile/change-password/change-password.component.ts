@@ -36,8 +36,8 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm = new FormGroup(
       {
         currentPassword: new FormControl('', [Validators.required,currentPasswordValidator(this.currentPasswordStored)]),
-        newPassword: new FormControl('',[ Validators.required, new PasswordValidatorDirective().validate]),
-        confirmPassword: new FormControl('', Validators.required),
+        passwordMatchValidator: new FormControl('',[ Validators.required, new PasswordValidatorDirective().validate]),
+        rePassword: new FormControl('', Validators.required),
       },
       //// Custom validators ///
       { validators: passwordMatchValidator() } 
@@ -49,11 +49,11 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit() {
     if (this.changePasswordForm.valid) {
-      const { newPassword } = this.changePasswordForm.value;
+      const { passwordMatchValidator } = this.changePasswordForm.value;
       // Update the user object with the new password
 
       if (this.user) {
-        this.user.password = newPassword;
+        this.user.password = passwordMatchValidator;
 
         // Save the updated user object back to localStorage
 

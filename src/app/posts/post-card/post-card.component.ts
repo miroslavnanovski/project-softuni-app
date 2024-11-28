@@ -23,7 +23,6 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
       this.apiService.getPosts(3).subscribe((posts) => {
         this.posts = posts;
-        console.log(posts);
         
         setTimeout(() => {
           this.isLoading=false;

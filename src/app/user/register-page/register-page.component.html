@@ -1,76 +1,64 @@
 <div class="register-container">
   <h2>Register</h2>
 
-  <form #form="ngForm" (ngSubmit)="register(form)">
+  <!-- Bind the form to the FormGroup -->
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <!-- Username Field -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        placeholder="Enter username"
+      />
+      <small class="areNotMatching"  *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+        Username must be at least 5 characters long.
+      </small>
+    </div>
+
     <!-- Email Field -->
     <div class="form-group">
       <label for="email">Email</label>
       <input
         type="email"
         id="email"
-        name="email" 
-        ngModel
+        formControlName="email"
         placeholder="Enter email"
-        required
-        validEmail
-        #email="ngModel"
       />
-      <small [ngClass]="{
-        'invalid': email.invalid && email.touched,
-        'valid': email.valid && email.touched,
-        'gray': !email.touched
-      }">
-        Please enter a valid email address (e.g., example&#64;domain.com).
+      <small class="areNotMatching" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        Please enter a valid email address.
       </small>
     </div>
 
-    <!-- Password Field -->
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password" 
-        ngModel
-        placeholder="Enter password"
-        required
-        #password="ngModel"
-        validPassword
-        
-      />
-      <small [ngClass]="{
-        'invalid': password.invalid && password.touched,
-        'valid': password.valid && password.touched,
-        'gray': !password.touched
-      }">
-        Password should be at least 8 characters long, contain a capital letter, and a number.
-      </small>
-    </div>
+    <!-- Password Group -->
+    <div formGroupName="passGroup">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter password"
+        />
+        <small class="areNotMatching" *ngIf="registerForm.get('passGroup.password')?.invalid && registerForm.get('passGroup.password')?.touched">
+          Password must be at least 8 characters long, contain a capital letter, and a number.
+        </small>
+      </div>
 
-    <!-- Re-enter Password Field -->
-    <div class="form-group">
-      <label for="repassword">Re-enter Password</label>
-      <input
-        type="password"
-        id="repassword"
-        name="rePassword"
-        ngModel
-        placeholder="Re-enter password"
-        required
-        #repassword="ngModel"
-        validPassword
-   
-      />
-      <small [ngClass]="{
-        'invalid': repassword.invalid && repassword.touched,
-        'valid': repassword.valid && repassword.touched,
-        'gray': !repassword.touched
-      }">
-        Re-enter your password.
-      </small>
+      <div class="form-group">
+        <label for="repassword">Re-enter Password</label>
+        <input
+          type="password"
+          id="repassword"
+          formControlName="rePassword"
+          placeholder="Re-enter password"
+        />
+        <small class= "areNotMatching" *ngIf="registerForm.get('passGroup')?.errors?.['passwordsMismatch'] && registerForm.get('passGroup')?.touched">
+          Passwords do not match.
+        </small>
+      </div>
     </div>
-
-    //REWORK FORM WITH REACTIVE APPROACH
 
     <!-- Telephone Number Field -->
     <div class="form-group">
@@ -78,15 +66,13 @@
       <input
         type="tel"
         id="telephone"
-        name="telephone" 
-        ngModel
+        formControlName="telephone"
         placeholder="Enter telephone number"
-        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
       />
       <small>Adding your phone number is optional!</small>
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" [disabled]="form.invalid">Register</button>
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
   </form>
 </div>
