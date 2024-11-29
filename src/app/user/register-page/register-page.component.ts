@@ -22,7 +22,7 @@ export class RegisterPageComponent {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, new EmailValidatorDirective]],
-      telephone: [''],
+      tel: [''],
       passGroup: this.fb.group(
         {
           password: ['', [Validators.required, new PasswordValidatorDirective]],
@@ -43,11 +43,11 @@ export class RegisterPageComponent {
     const {
       username,
       email,
-      telephone,
+      tel,
       passGroup: { password, rePassword },
     } = this.registerForm.value;
 
-    this.userService.register(username,email,telephone,password,rePassword).subscribe( ()=> {
+    this.userService.register(username,email,tel,password,rePassword).subscribe( ()=> {
       this.router.navigate(['/home'])
     });
 

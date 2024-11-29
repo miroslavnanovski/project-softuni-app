@@ -21,7 +21,7 @@ export class HomePageComponent {
     return this.userService.isLoggedIn;
   }
 
-  get firstName():string {
+  get username():string {
     return this.userService.user?.username || '';
   }
 

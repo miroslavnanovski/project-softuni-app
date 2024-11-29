@@ -16,13 +16,22 @@ export class UserProfileComponent {
   constructor(private userService:userService,private router:Router){}
   
   logout() {
-    this.router.navigate(['/home'])
-    console.log(`works`);
-    
-    return this.userService.logout();
+    this.userService.logout().subscribe(() => {
+      this.router.navigate(['/login'])
+    });
   }
 
   onLinkClick() {
     this.closeMenu(); // Close the menu by calling the parent's method
   }
+
+  get username():string {
+    return this.userService.user?.username || '';
+  }
+
+  get email():string {
+    return this.userService.user?.email || '';
+  }
+
+  
 }

@@ -19,13 +19,9 @@ export class userService {
   }
 
   constructor(private http:HttpClient) {
-    try{
-      const localUser = localStorage.getItem(this.USER_KEY) || '';
-      this.user = JSON.parse(localUser);
-    } catch(error)
-     {
-      this.user = null;
-    }
+    this.user$.subscribe((user) => {
+      this.user = user;
+    })
   }
    
   login(email:string, password:string){
@@ -36,23 +32,31 @@ export class userService {
       this.user$$.next(user)));
   }
 
-  register(username:string,email:string,telephone:string,password:string,rePassword:string){
+  register(username:string,email:string,tel:string,password:string,rePassword:string){
     
     return this.http
-      .post<UserForAuth>('/api/register', {username,email,telephone,password,rePassword} )
+      .post<UserForAuth>('/api/register', {username,email,tel,password,rePassword} )
       .pipe(tap(user => 
       this.user$$.next(user)));
   }
 
   logout(){
-    this.user = null;
-    localStorage.removeItem(this.USER_KEY)
+    return this.http.post('/api/logout', {})
+    .pipe(tap((user) => this.user$$.next(null)));
   }
 
   getProfile(){
+    
     return this.http
     .get<UserForAuth>('/api/users/profile')
     .pipe(tap(user => this.user$$.next(user)));
+    
 
+  }
+
+  updateProfile(username:string,email:string,tel?:string){
+    return this.http
+    .put<UserForAuth>('/api/users/profile',{username,email,tel})
+    .pipe(tap(user => this.user$$.next(user)));
   }
 }

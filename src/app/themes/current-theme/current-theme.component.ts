@@ -24,7 +24,6 @@ ngOnInit(): void {
  
   this.apiService.getSingleTheme(id).subscribe(data => {
     this.theme = data;
-    console.log(data);
     
   })
 

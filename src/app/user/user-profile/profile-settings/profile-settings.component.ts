@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserForAuth } from '../../../types/user';
+import { userService } from '../../user-service.service';
 
 
 @Component({
@@ -15,28 +16,29 @@ export class ProfileSettingsComponent implements OnInit {
 
   user:UserForAuth | null = null;
 
+  constructor(private userService:userService) {}
+
   ngOnInit(): void {
-    const userData = localStorage.getItem('[user]');
-    
-    if (userData) {
-      this.user = JSON.parse(userData) as UserForAuth;
-      
-
-      this.editForm.patchValue({
-        username: this.user.username,
-        email: this.user.email,
-        telephone: this.user.telephone
-      });
+    this.userService.getProfile().subscribe({
+      next: (userData: UserForAuth) => {
+        this.user = userData;
+  
+        this.editForm.patchValue({
+          username: this.user.username,
+          email: this.user.email,
+          tel: this.user.tel
+        });
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      }
+    });
   }
-}
-
-
-
-
+  
   editForm = new FormGroup({
     username: new FormControl('',[Validators.required,Validators.minLength(3)]),
     email:new FormControl('',[Validators.required]),
-    telephone:new FormControl('',[Validators.required])
+    tel:new FormControl('',[Validators.required])
   })
 
 
@@ -46,23 +48,26 @@ export class ProfileSettingsComponent implements OnInit {
     this.isEdited = !this.isEdited;
   }
 
-  saveChanges(){
+  saveChanges(): void {
+    const { username, email, tel } = this.editForm.value;
 
-    if(this.editForm.valid && this.user){
-      const updatedUser: UserForAuth  = {
-        ...this.user, // Keep other properties unchanged
-        username: this.editForm.get('username')?.value || '', // Ensure value is a string
-        email: this.editForm.get('email')?.value || '',
-        telephone: this.editForm.get('telephone')?.value || '',
-        password: this.user.password
-      };
+    this.userService.updateProfile(username?? '', email?? '', tel?? '').subscribe({
+      next: (updatedUser: UserForAuth) => {
+        this.user = updatedUser; // Update local user data
+        console.log('Profile updated successfully:', updatedUser);
 
+        this.editForm.patchValue({
+          username: updatedUser.username,
+          email: updatedUser.email,
+          tel: updatedUser.tel
+        });
 
-      this.user = updatedUser;
-      localStorage.setItem('[user]', JSON.stringify(updatedUser));
-
-      this.isEdited = false;
-
+        this.isEdited = false; // Exit edit mode
+      },
+      error: (err) => {
+        console.error('Failed to update profile:', err);
+      }
+    });
   }
 
-}}
+ }

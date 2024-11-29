@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { userService } from '../../user/user-service.service';
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
-import { HomeCardsComponent } from '../../shared/home-cards/home-cards.component';
+import { UserForAuth } from '../../types/user';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,7 @@ import { HomeCardsComponent } from '../../shared/home-cards/home-cards.component
 })
 export class HeaderComponent {
 
+
   isShown:boolean=false;
 
   constructor(private userService:userService,private router:Router){}
@@ -23,7 +24,7 @@ export class HeaderComponent {
     return this.userService.isLoggedIn;
   }
 
-  get firstName():string {
+  get username():string {
     return this.userService.user?.username || '';
   }
 

@@ -5,7 +5,7 @@
   </div>
     <ul class="loginBar">
       @if(isLoggedIn) {
-        <li><a class="link" (click)="showProfile()">John's Profile</a>
+        <li><a class="link" (click)="showProfile()">{{username}}</a>
         @if(isShown){
           <div class="user-profile">
             <app-user-profile class="down" [closeMenu]="showProfile.bind(this)"/>

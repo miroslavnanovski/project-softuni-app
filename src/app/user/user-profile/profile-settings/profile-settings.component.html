@@ -10,7 +10,7 @@
     <div class="profile-details">
       <p><strong>Username:</strong>{{user?.username}}</p>
       <p><strong>Email:</strong> {{user?.email}}</p>
-      <p><strong>Telephone:</strong> {{user?.telephone}}</p>
+      <p><strong>Telephone:</strong> {{user?.tel}}</p>
     </div>
     <button class="edit-button" (click)="toggleEdit()">Edit Profile</button>
   </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                   <label for="phone">Telephone:</label>
-                  <input type="text" formControlName="telephone">
+                  <input type="text" formControlName="tel">
                 </div>
                 <button type="submit" class="save-button" (click)="saveChanges()">Save</button>
                 <button class="cancel-button" (click)="toggleEdit()">Cancel</button>
