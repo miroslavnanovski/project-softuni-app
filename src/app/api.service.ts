@@ -11,7 +11,6 @@ import { Theme } from './types/themes';
 export class ApiService {
 
 
-
   constructor(private http:HttpClient) { }
   getPosts(limit?: number) {
  
@@ -44,6 +43,15 @@ export class ApiService {
     return this.http.post<Theme>(`/api/themes`,payload)
   }
 
+  deleteTheme(themeId:string){
+    return this.http.delete<Theme>(`/api/themes/${themeId}`)
+  }
 
+  postComment(postText:string,themeId:string){
+    const payload = {postText};
+
+    return this.http.post(`/api/themes/${themeId}`,payload)
+
+  }
 
 }

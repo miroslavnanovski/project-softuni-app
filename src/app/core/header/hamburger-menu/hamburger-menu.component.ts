@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MenuComponent } from '../menu/menu.component';
 
@@ -13,13 +13,23 @@ export class HamburgerMenuComponent {
 
   @Input() closeMenu!: () => void;
   
-      isMenuOpened:boolean = false;
+  isMenuOpened:boolean = false;
+  
+  constructor(private eRef: ElementRef) {}
 
-
-    toggleLinks(): void {
+  toggleLinks(): void {
     this.isMenuOpened = !this.isMenuOpened;
-
+  
     }
+
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: Event) {
+    if (this.isMenuOpened && !this.eRef.nativeElement.contains(event.target)) {
+      this.isMenuOpened = false; 
+    }
+  }
+}
+
+
   
 
-}

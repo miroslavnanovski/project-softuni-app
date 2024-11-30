@@ -44,9 +44,26 @@ function subscribe(req, res, next) {
         .catch(next);
 }
 
+function deleteTheme(req,res,next){
+    const { themeId } = req.params;
+    const { _id:userId } = req.user;
+
+    themeModel.findOneAndDelete({_id: themeId, userId})
+    .then(deletedTheme => {
+        if(!deletedTheme){
+            return res.status(401).json({message : 'Not Allowed!'});
+        }
+
+        return postModel.deleteMany({themeId: themeId})
+        .then(() => res.status(200).json({ message: 'Theme and related post deleted successfully!'}))
+    })
+    .catch(next);
+}
+
 module.exports = {
     getThemes,
     createTheme,
     getTheme,
     subscribe,
+    deleteTheme
 }

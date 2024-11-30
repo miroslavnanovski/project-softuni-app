@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar">
     <div class="menu-holder">
-    <app-hamburger-menu class="menu"/>
+    <app-hamburger-menu class="menu" (click)="toggleHamburger()"/>
   </div>
     <ul class="loginBar">
       @if(isLoggedIn) {

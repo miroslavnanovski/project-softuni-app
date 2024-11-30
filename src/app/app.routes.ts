@@ -12,6 +12,8 @@ import { CreateThemeComponent } from './themes/create-theme/create-theme.compone
 import { LoginPageComponent } from './user/login-page/login-page.component';
 import { ProfileSettingsComponent } from './user/user-profile/profile-settings/profile-settings.component';
 import { ChangePasswordComponent } from './user/user-profile/change-password/change-password.component';
+import { YourThemesComponent } from './themes/your-themes/your-themes.component';
+import { CreatePostComponent } from './posts/create-post/create-post.component';
 
 export const routes: Routes = [
     {path:'', redirectTo: '/home', pathMatch:'full'},
@@ -24,12 +26,15 @@ export const routes: Routes = [
     {path: 'themes', 
         children:[
             {path:'',component:ThemesPageComponent},
-            {path:':themeId', component:CurrentThemeComponent},
+            // {path:':themeId', component:CurrentThemeComponent},
         ]
     },
     {path:'create-theme', component:CreateThemeComponent},
     {path:'profile-settings', component:ProfileSettingsComponent},
-    {path:'change-password', component:ChangePasswordComponent}
+    {path:'change-password', component:ChangePasswordComponent},
+    {path:':username/themes', component:YourThemesComponent},
+    {path:':username/themes/:themeId/create-post', component:CreatePostComponent},
+    {path:':username/themes/:themeId',component:CurrentThemeComponent}
     // {path:'404',component:ErrorComponent},
     // {path: '**', redirectTo:'/404'}
 

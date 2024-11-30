@@ -43,3 +43,14 @@
   textarea.form-control {
     resize: vertical;
   }
+
+  .label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .post-comment {
+    cursor: pointer;
+  }
+ 

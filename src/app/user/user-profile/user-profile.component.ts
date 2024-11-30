@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { userService } from '../user-service.service';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,11 +10,26 @@ import { userService } from '../user-service.service';
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit{
+
+  currentUsername:string = '';
 
   @Input() closeMenu!: () => void;
 
   constructor(private userService:userService,private router:Router){}
+  
+  ngOnInit(): void {
+    this.userService.getProfile().subscribe({
+      next: (userData) => {
+        this.currentUsername = userData.username; 
+        console.log(this.currentUsername);
+        
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      }
+    });
+  }
   
   logout() {
     this.userService.logout().subscribe(() => {
@@ -33,5 +49,10 @@ export class UserProfileComponent {
     return this.userService.user?.email || '';
   }
 
+  viewThemes(): void {
+    this.router.navigate([`/${this.currentUsername}/themes`]);
+  }
+
+  
   
 }

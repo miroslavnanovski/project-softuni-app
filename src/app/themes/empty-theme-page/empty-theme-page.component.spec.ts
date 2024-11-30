@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeCardComponent } from './theme-card.component';
+import { EmptyThemePageComponent } from './empty-theme-page.component';
 
-describe('ThemeCardComponent', () => {
-  let component: ThemeCardComponent;
-  let fixture: ComponentFixture<ThemeCardComponent>;
+describe('EmptyThemePageComponent', () => {
+  let component: EmptyThemePageComponent;
+  let fixture: ComponentFixture<EmptyThemePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThemeCardComponent]
+      imports: [EmptyThemePageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ThemeCardComponent);
+    fixture = TestBed.createComponent(EmptyThemePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
