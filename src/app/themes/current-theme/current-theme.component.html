@@ -1,6 +1,6 @@
 <div class="current-theme">
     <h2>{{theme.themeName}}</h2>
-    <span>Subscribers: {{theme?.subscribers?.length || 0}}</span>
+    <span>Subscribers: {{theme.subscribers.length || 0}}</span>
 
     @for (post of theme.posts; track $index) {
     <div class="posts">

@@ -1,36 +1,40 @@
+<div class="front-page">
+  @if(!isLoggedIn){
+    <div class="login-section"> 
+      <app-login-page/>
+    </div>
+  } @else {
+    <div class="login-section"> 
+    <div class="welcome-panel">
+      <h3>Welcome, {{username}}!</h3>
+      <p>This is your personalized forum management dashboard!</p>
+      <p>You can manage posts, themes, and users from the menu above.</p>
+      <div class="quick-links">
+        <h4>Quick Actions</h4>
+        <button class="btn">Create Theme</button>
+        <button class="btn">Manage Posts</button>
+      </div>
+    </div>
+  </div>
+  }
+  
 
-<div class="welcome-message">
-    @if(isLoggedIn){
-        <h2>Welcome, {{username}}!</h2>
-    } @else {
-        <h2>Welcome!</h2>
-    }
-    
-    <p>
-        Join discussions, ask questions, and share your thoughts. Explore different themes and engage with the community.
-    </p>
+  <!-- News Feed Section -->
+  <div class="news-feed">
+    <h2>News Feed</h2>
+    <div class="feed-item">
+      <p>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Latest Updates Section -->
+  <div class="latest-updates">
+    <h2>Latest Posts</h2>
+    <ul>
+      <li>
+        <app-post-card/>
+      </li>
+    </ul>
+  </div>
 </div>
-<div class="cards-holder">
-<app-home-cards
-[value]="'12145'"
-[title]="'Current likes'"
-[icon]="''"
-[backgroundColor]="'#963eff'"/>
-
-<app-home-cards
-[value]="'31145'"
-[title]="'Current themes'"
-[icon]="''"
-[backgroundColor]="'#33ccff'"/>
-
-<app-home-cards
-[value]="'13545'"
-[title]="'Current users'"
-[icon]="''"
-[backgroundColor]="'#1fe592'"/>
-</div>
-
-
-
-
-

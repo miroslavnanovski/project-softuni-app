@@ -5,7 +5,7 @@
        </div>
       <h1>No Themes Created Yet</h1>
       <p>You haven't created any themes. Fill the form down below to create your first theme!</p>
-      <app-create-theme class="create"/>
+      <app-create-theme class="create" (themeCreated)="onThemeCreated($event)"></app-create-theme>
     </div>
   </div>
   

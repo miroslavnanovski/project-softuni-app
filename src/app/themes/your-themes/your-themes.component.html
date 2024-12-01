@@ -1,25 +1,23 @@
 <div class="user-themes-page">
-    @if(!isEmpty){
-        <h1>Your Themes</h1>
-    }
-    <div class="themes-grid">
-        @if(isEmpty){
-            <app-empty-theme-page/>
-        }  @else {
-            @for (theme of userThemes; track $index) {
-                <div class="theme-card">
-                    <div class="x-holder">
-                    <i class="fa-solid fa-xmark remove"></i>
-                </div>
-                    <h2>{{ theme.themeName }}</h2>
-                    <p>{{ theme.created_at }}</p>
-                    <div class="btn-holder">
-                    <button class="view-theme-btn" (click)="viewPosts(theme._id)" >View Posts</button>
-                    <button class="view-theme-btn" (click)="createPost(theme._id)"><i class="fa-solid fa-pen"></i>   Post a comment</button>
-                </div>
-                  </div>
-            }
-        }
+    <h1 *ngIf="!isEmpty">Your Themes</h1>
+  
+    <div class="themes-grid" *ngIf="!isEmpty">
+      <div *ngFor="let theme of userThemes; trackBy: trackByIndex" class="theme-card">
+        <div class="x-holder">
+          <i class="fa-solid fa-xmark remove" (click)="deleteTheme(theme._id)"></i>
+        </div>
+        <h2>{{ theme.themeName }}</h2>
+        <p>{{ theme.created_at }}</p>
+        <div class="btn-holder">
+          <button class="view-theme-btn" (click)="viewPosts(theme._id)">View Posts</button>
+          <button class="view-theme-btn" (click)="createPost(theme._id)">
+            <i class="fa-solid fa-pen"></i> Post a comment
+          </button>
+        </div>
+      </div>
     </div>
+  
+    <app-empty-theme-page *ngIf="isEmpty" (themeCreated)="onThemeCreated($event)"></app-empty-theme-page>
+
   </div>
   

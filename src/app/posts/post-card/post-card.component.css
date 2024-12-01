@@ -14,6 +14,7 @@
 
 .post-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .post-title {
@@ -24,8 +25,8 @@
 
 .post-content {
   margin: 12px 0;
-  color: #555;
-  width: 900px;
+  color: #555
+
 }
 
 .post-footer {

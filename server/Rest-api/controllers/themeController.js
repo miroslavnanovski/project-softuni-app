@@ -44,21 +44,39 @@ function subscribe(req, res, next) {
         .catch(next);
 }
 
-function deleteTheme(req,res,next){
+function deleteTheme(req, res, next) {
     const { themeId } = req.params;
-    const { _id:userId } = req.user;
-
-    themeModel.findOneAndDelete({_id: themeId, userId})
-    .then(deletedTheme => {
-        if(!deletedTheme){
-            return res.status(401).json({message : 'Not Allowed!'});
+    const { _id: userId } = req.user;
+  
+    console.log(`Request to delete theme: ${themeId}, by user: ${userId}`);
+  
+    themeModel
+      .findOneAndDelete({ _id: themeId, userId })
+      .then((deletedTheme) => {
+        if (!deletedTheme) {
+          console.warn('Unauthorized attempt to delete theme');
+          return res.status(401).json({ message: 'Not allowed!' });
         }
-
-        return postModel.deleteMany({themeId: themeId})
-        .then(() => res.status(200).json({ message: 'Theme and related post deleted successfully!'}))
-    })
-    .catch(next);
-}
+  
+        console.log('Theme deleted:', deletedTheme);
+  
+        // Proceed to delete related posts
+        return postModel.deleteMany({ themeId }).then(() => {
+          console.log('Related posts deleted successfully');
+          return res.status(200).json({
+            message: 'Theme and related posts deleted successfully!',
+          });
+        });
+      })
+      .catch((err) => {
+        console.error('Error during deleteTheme:', err);
+        return res.status(500).json({
+          message: 'Internal Server Error',
+          error: err.message || 'Unexpected error',
+        });
+      });
+  }
+  
 
 module.exports = {
     getThemes,

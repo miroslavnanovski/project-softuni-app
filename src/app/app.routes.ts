@@ -23,18 +23,20 @@ export const routes: Routes = [
     {path: 'contact', component:ContactPageComponent},
     {path: 'register', component:RegisterPageComponent},
     {path: 'login', component:LoginPageComponent},
+    {path:':username/themes', component:YourThemesComponent},
+    {path:':username/themes/:themeId/create-post', component:CreatePostComponent},
+    {path:':username/themes/:themeId',component:CurrentThemeComponent},
+    {path:'create-theme', component:CreateThemeComponent},
+    {path:'profile-settings', component:ProfileSettingsComponent},
+    {path:'change-password', component:ChangePasswordComponent},
     {path: 'themes', 
         children:[
             {path:'',component:ThemesPageComponent},
             // {path:':themeId', component:CurrentThemeComponent},
         ]
     },
-    {path:'create-theme', component:CreateThemeComponent},
-    {path:'profile-settings', component:ProfileSettingsComponent},
-    {path:'change-password', component:ChangePasswordComponent},
-    {path:':username/themes', component:YourThemesComponent},
-    {path:':username/themes/:themeId/create-post', component:CreatePostComponent},
-    {path:':username/themes/:themeId',component:CurrentThemeComponent}
+   
+    
     // {path:'404',component:ErrorComponent},
     // {path: '**', redirectTo:'/404'}
 

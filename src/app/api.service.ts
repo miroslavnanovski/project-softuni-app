@@ -44,7 +44,7 @@ export class ApiService {
   }
 
   deleteTheme(themeId:string){
-    return this.http.delete<Theme>(`/api/themes/${themeId}`)
+    return this.http.delete(`/api/themes/${themeId}`)
   }
 
   postComment(postText:string,themeId:string){
