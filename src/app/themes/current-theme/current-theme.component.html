@@ -1,6 +1,6 @@
 <div class="current-theme">
     <h2>{{theme.themeName}}</h2>
-    <span>Subscribers: {{theme.subscribers.length || 0}}</span>
+    <span>Subscribers: {{ theme?.subscribers?.length || 0 }}</span>
 
     @for (post of theme.posts; track $index) {
     <div class="posts">
@@ -10,7 +10,18 @@
   
         <div class="post-info">
           <span class="post-date">Posted on: {{ post?.created_at }}</span>
-          <span class="post-likes">Likes: {{ post?.likes?.length || 0 }}</span>
+          <span class="post-likes">Likes: {{ post?.likes?.length || 0 }} 
+            @if (!isPostLikedByUser(post)) {
+              <i 
+                class="fa-regular fa-heart" 
+                (click)="likeAPost(post._id, post)">
+              </i>
+            } @else {
+              <i 
+                class="fa-solid fa-heart">
+              </i>
+            }
+            </span>
         </div>
       </div>
     </div>

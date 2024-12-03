@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment.development';
 import { Post } from './types/posts';
 import { Theme } from './types/themes';
+import { catchError, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -52,6 +53,16 @@ export class ApiService {
 
     return this.http.post(`/api/themes/${themeId}`,payload)
 
+  }
+
+  likePost(postId:string){
+    console.log(`likeAPost triggered for postId: ${postId}`);
+    return this.http.put(`/api/likes/${postId}`, {}).pipe(
+      catchError(error => {
+        console.error('Error liking post', error);
+        return throwError(() => error); 
+      })
+    );
   }
 
 }
