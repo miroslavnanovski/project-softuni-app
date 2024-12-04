@@ -3,6 +3,7 @@ import { FormGroup,FormControl,ReactiveFormsModule, Validators } from '@angular/
 import { RouterLink } from '@angular/router';
 import { UserForAuth } from '../../../types/user';
 import { userService } from '../../user-service.service';
+import { ActivityLoggerService } from '../../activity-logger.service';
 
 
 @Component({
@@ -15,13 +16,17 @@ import { userService } from '../../user-service.service';
 export class ProfileSettingsComponent implements OnInit {
 
   user:UserForAuth | null = null;
+  username:string = '';
+  userId:string = '';
 
-  constructor(private userService:userService) {}
+  constructor(private userService:userService, private activityLoggerService:ActivityLoggerService) {}
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
       next: (userData: UserForAuth) => {
         this.user = userData;
+        this.username = this.user.username;
+        this.userId = this.user._id;
   
         this.editForm.patchValue({
           username: this.user.username,
@@ -55,6 +60,7 @@ export class ProfileSettingsComponent implements OnInit {
       next: (updatedUser: UserForAuth) => {
         this.user = updatedUser; // Update local user data
         console.log('Profile updated successfully:', updatedUser);
+        this.activityLoggerService.logActivity(`updated his profile!`,this.userId,this.username);
 
         this.editForm.patchValue({
           username: updatedUser.username,

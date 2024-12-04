@@ -45,37 +45,44 @@ function subscribe(req, res, next) {
 }
 
 function deleteTheme(req, res, next) {
-    const { themeId } = req.params;
-    const { _id: userId } = req.user;
-  
-    console.log(`Request to delete theme: ${themeId}, by user: ${userId}`);
-  
-    themeModel
-      .findOneAndDelete({ _id: themeId, userId })
-      .then((deletedTheme) => {
-        if (!deletedTheme) {
-          console.warn('Unauthorized attempt to delete theme');
-          return res.status(401).json({ message: 'Not allowed!' });
-        }
-  
-        console.log('Theme deleted:', deletedTheme);
-  
-        // Proceed to delete related posts
-        return postModel.deleteMany({ themeId }).then(() => {
-          console.log('Related posts deleted successfully');
-          return res.status(200).json({
-            message: 'Theme and related posts deleted successfully!',
-          });
+  const { themeId } = req.params;
+  const { _id: userId } = req.user;
+
+  console.log(`Request to delete theme: ${themeId}, by user: ${userId}`);
+
+  themeModel
+    .findOneAndDelete({ _id: themeId, userId })
+    .then((deletedTheme) => {
+      if (!deletedTheme) {
+        console.warn('Unauthorized attempt to delete theme');
+        return res.status(401).json({ message: 'Not allowed!' });
+      }
+
+      console.log('Theme deleted:', deletedTheme);
+
+      // Proceed to delete related posts
+      return postModel.deleteMany({ themeId }).then(() => {
+        console.log('Related posts deleted successfully');
+        return res.status(200).json({
+          message: 'Theme and related posts deleted successfully!',
         });
-      })
-      .catch((err) => {
-        console.error('Error during deleteTheme:', err);
+      }).catch((err) => {
+        // Log any error that might happen while deleting posts
+        console.error('Error deleting related posts:', err);
         return res.status(500).json({
-          message: 'Internal Server Error',
+          message: 'Failed to delete related posts',
           error: err.message || 'Unexpected error',
         });
       });
-  }
+    })
+    .catch((err) => {
+      console.error('Error during deleteTheme:', err);
+      return res.status(500).json({
+        message: 'Internal Server Error',
+        error: err.message || 'Unexpected error',
+      });
+    });
+}
   
 
 module.exports = {

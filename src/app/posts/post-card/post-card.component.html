@@ -2,14 +2,13 @@
 
 @for (post of posts; track $index) {
 
-  <article class="post-item" [routerLink]="['/', post.userId.username, 'themes', post.themeId._id]">
-  <h2 class="post-title">{{ post.themeId.themeName }}</h2>
-  <p class="post-content">{{ post.content }}</p>
-  <div class="post-footer">
-    <span class="post-author">{{ post.userId.username}}</span>
-    <span class="post-date">{{ post.created_at}}</span>
-  </div>
-  
+  <article class="post-item" [routerLink]="['/', post?.userId?.username, 'themes', post?.themeId?._id]">
+    <h2 class="post-title">{{ post?.themeId?.themeName }}</h2>
+    <p class="post-content">{{ post?.content }}</p>
+    <div class="post-footer">
+      <span class="post-author">{{ post?.userId?.username }}</span>
+      <span class="post-date">{{ post?.created_at }}</span>
+    </div>
 </article>
 }
 

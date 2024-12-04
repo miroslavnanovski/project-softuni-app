@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Post } from '../../types/posts';
 import { userService } from '../../user/user-service.service';
 import { UserForAuth } from '../../types/user';
+import { ActivityLoggerService } from '../../user/activity-logger.service';
 
 
 @Component({
@@ -19,10 +20,12 @@ export class CurrentThemeComponent implements OnInit {
   user:UserForAuth | null = null;
   posts: Post[] = [];
   userId: string = '';
+  username:string = ''
+ 
 
   theme = {} as Theme; // Casting Theme to be and object of type Theme
 
-  constructor(private route: ActivatedRoute, private apiService:ApiService,private location:Location,private userService:userService) {}
+  constructor(private route: ActivatedRoute, private apiService:ApiService,private location:Location,private userService:userService, private activityLoggerService:ActivityLoggerService ) {}
 
 
   
@@ -32,7 +35,7 @@ ngOnInit(): void {
   this.apiService.getSingleTheme(id).subscribe(themeData => {
     this.theme = themeData;
     this.posts = themeData.posts;
-
+    this.theme.subscribers = this.theme.subscribers || [];
     // Initialize the liked flag for each post (false by default)
     this.posts.forEach(post => {
       post.liked = false;  // Initialize liked state for each post
@@ -43,6 +46,10 @@ ngOnInit(): void {
     next: (userData: UserForAuth) => {
       this.user = userData;
       this.userId = this.user._id;
+      const username = this.user.username;
+      this.username = username;
+    
+
       
 }});   
 
@@ -71,6 +78,7 @@ likeAPost(postId: string, post: Post) {
       // Update the UI to reflect the like action
       post.liked = true; 
       post.likes.push(this.userId); // Add the current user ID to the likes array
+      this.activityLoggerService.logActivity(`liked the post: ${post.text}`,this.userId,this.username);
     },
     error: error => {
       console.error('Error liking post:', error);

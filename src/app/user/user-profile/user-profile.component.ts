@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { userService } from '../user-service.service';
 import { ApiService } from '../../api.service';
+import { ActivityLoggerService } from '../activity-logger.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +17,7 @@ export class UserProfileComponent implements OnInit{
 
   @Input() closeMenu!: () => void;
 
-  constructor(private userService:userService,private router:Router){}
+  constructor(private userService:userService,private router:Router,private activityLoggerService:ActivityLoggerService){}
   
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
@@ -32,6 +33,7 @@ export class UserProfileComponent implements OnInit{
   }
   
   logout() {
+    localStorage.removeItem('userData');
     this.userService.logout().subscribe(() => {
       this.router.navigate(['/login'])
     });

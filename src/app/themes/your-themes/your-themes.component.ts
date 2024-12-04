@@ -6,6 +6,7 @@ import { ApiService } from '../../api.service';
 import { Router, RouterLink } from '@angular/router';
 import { EmptyThemePageComponent } from '../empty-theme-page/empty-theme-page.component';
 import { NgFor, NgIf } from '@angular/common';
+import { ActivityLoggerService } from '../../user/activity-logger.service';
 
 
 
@@ -30,7 +31,8 @@ constructor(private userService:userService,
   private apiService:ApiService,
   private router:Router,
   private ngZone: NgZone,
-  private cdr: ChangeDetectorRef,){}
+  private cdr: ChangeDetectorRef,
+  private activityLoggerService: ActivityLoggerService){}
 
 ngOnInit(): void {
 
@@ -92,34 +94,42 @@ onThemeCreated(newTheme: Theme): void {
 
 
 deleteTheme(themeId: string): void {
-  this.apiService.deleteTheme(themeId).subscribe({
-    next: () => {
-      console.log(`Theme ${themeId} deleted successfully!`);
+  const themeToDelete = this.themes.find(theme => theme._id === themeId);  // Find the theme by ID
+  
+  if (themeToDelete) {
+    const themeName = themeToDelete.themeName  || 'Unnamed Theme'; 
 
-      this.themes = this.themes.filter(theme => theme._id !== themeId);
-      this.userThemes = this.userThemes.filter(theme => theme._id !== themeId);
+    this.apiService.deleteTheme(themeId).subscribe({
+      next: () => {
+        // Log the activity
+        this.activityLoggerService.logActivity(`deleted the theme: "${themeName}"`,this.currentUserId,this.currentUsername);
 
-      this.isEmpty = this.userThemes.length === 0;
+        // Update the theme arrays
+        this.themes = this.themes.filter(theme => theme._id !== themeId);
+        this.userThemes = this.userThemes.filter(theme => theme._id !== themeId);
 
-      this.ngZone.run(() => {});
-      this.cdr.detectChanges();
+        // Check if there are no themes left for the user
+        this.isEmpty = this.userThemes.length === 0;
+
+        // Trigger UI update manually
+        this.ngZone.run(() => {});
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error deleting theme:', err);
+        if (err.status === 500) {
+          console.warn('Theme deleted, but backend reported an error.');
+          // Force UI update even if backend reports 500
+          this.userThemes = this.userThemes.filter((theme) => theme._id !== themeId);
           
-
-    },
-    error: (err) => {
-      console.error('Error deleting theme:', err);
-      if (err.status === 500) {
-        console.warn('Theme deleted, but backend reported an error.');
-        // Force UI update even if backend reports 500
-        this.userThemes = this.userThemes.filter((theme) => theme._id !== themeId);
-
-         // Update the empty state
-         this.isEmpty = this.userThemes.length === 0;
-
-        
-      }
-    },
-  });
+          // Update the empty state
+          this.isEmpty = this.userThemes.length === 0;
+        }
+      },
+    });
+  } else {
+    console.warn('Theme not found!');
+  }
 }
 
 trackByIndex(index: number): number {

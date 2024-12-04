@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
+import { ActivityLoggerService } from './activity-logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,31 +19,32 @@ export class userService {
     return !!this.user;
   }
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private activityLoggerService: ActivityLoggerService) {
     this.user$.subscribe((user) => {
       this.user = user;
     })
   }
    
-  login(email:string, password:string){
-    
+  login(email: string, password: string) {
     return this.http
-      .post<UserForAuth>('/api/login', {email,password} )
-      .pipe(tap(user => 
-      this.user$$.next(user)));
+      .post<UserForAuth>('/api/login', { email, password })
+      .pipe(tap(user => {
+        this.user$$.next(user);
+      }));
   }
-
   register(username:string,email:string,tel:string,password:string,rePassword:string){
     
     return this.http
       .post<UserForAuth>('/api/register', {username,email,tel,password,rePassword} )
       .pipe(tap(user => 
       this.user$$.next(user)));
+      
   }
 
   logout(){
     return this.http.post('/api/logout', {})
     .pipe(tap((user) => this.user$$.next(null)));
+    
   }
 
   getProfile(){

@@ -21,7 +21,7 @@ export class PostCardComponent implements OnInit {
   isTruncated:boolean = true;
 
   ngOnInit(): void {
-      this.apiService.getPosts(7).subscribe((posts) => {
+      this.apiService.getPosts(6).subscribe((posts) => {
         this.posts = posts;
         
          setTimeout(() => {

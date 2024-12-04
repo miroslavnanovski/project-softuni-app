@@ -30,6 +30,7 @@ export class LoginPageComponent {
 
 
     this.userService.login(email,password).subscribe(()=>{
+      
       this.router.navigate(['/home'])
     });
     

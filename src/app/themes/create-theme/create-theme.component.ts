@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } f
 import { ApiService } from '../../api.service';
 import { UserForAuth } from '../../types/user';
 import { Theme } from '../../types/themes';
+import { ActivityLoggerService } from '../../user/activity-logger.service';
 
 @Component({
   selector: 'app-create-theme',
@@ -18,10 +19,11 @@ export class CreateThemeComponent implements OnInit {
 
   user:UserForAuth | null = null;
   currentUsername:string = '';
+  userId:string = '';
 
   creationForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService:userService,private apiService:ApiService,private router:Router){
+  constructor(private fb: FormBuilder, private userService:userService,private apiService:ApiService,private router:Router, private activityLoggerService:ActivityLoggerService){
     this.creationForm = this.fb.group({
       themeName: ['', [Validators.required, Validators.minLength(5)]],
       postText: ['', [Validators.required, Validators.minLength(5)]],
@@ -34,6 +36,7 @@ export class CreateThemeComponent implements OnInit {
       next: (userData: UserForAuth) => {
         this.user = userData;
         this.currentUsername = this.user.username;
+        this.userId = this.user._id;
         
   }});   
   }
@@ -45,7 +48,9 @@ export class CreateThemeComponent implements OnInit {
   
       this.apiService.createTheme(themeName, postText).subscribe({
         next: (newTheme: Theme) => {
-          console.log('Theme created:', newTheme); // Debug log
+          
+          this.activityLoggerService.logActivity(`created a theme called: ${themeName}`,this.userId,this.currentUsername);
+
           this.themeCreated.emit(newTheme);  // Emit the newly created theme
   
           // Navigate to themes page
