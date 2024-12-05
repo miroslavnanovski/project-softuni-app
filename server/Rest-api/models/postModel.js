@@ -6,10 +6,6 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    content: {
-        type: String,
-        required: false // Set to true if this field is mandatory
-    },
     likes: [{
         type: ObjectId,
         ref: "User"

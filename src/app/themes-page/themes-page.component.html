@@ -1,8 +1,19 @@
-<div class="forum-container">
-    <section class="most-popular-themes">
-    </section>
-    <h1>All themes</h1>
-    <section class="posts-list">
-    </section>
+<div class="themes-page">
+  <h1 class="page-title">All Available Themes</h1>
+  <div class="themes-container">
+    <div *ngFor="let theme of paginatedThemes" class="theme-card" (click)="viewTheme(theme._id)">
+      <div class="theme-image">
+        <img [src]="themeImages[theme._id]" alt="Theme Image">
+      </div>
+      <h2 class="theme-title">{{ theme.themeName }}</h2>
+      <p class="theme-creator">Created by: {{ theme.userId.username }}</p>
+      <p class="theme-subscribers">Subscribers: {{ theme.subscribers.length }}</p>
+      <p class="theme-date">Created on: {{ theme.created_at}}</p>
+    </div>
   </div>
-  
+
+  <div class="pagination">
+    <button *ngIf="currentPage > 1" (click)="previousPage()">Previous</button>
+    <button *ngIf="currentPage * itemsPerPage < themes.length" (click)="nextPage()">Next</button>
+  </div>
+</div>

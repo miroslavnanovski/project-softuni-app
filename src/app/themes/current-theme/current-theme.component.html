@@ -1,34 +1,61 @@
-<div class="current-theme">
-    <h2>{{theme.themeName}}</h2>
+<div class="wrapper">
+  <div class="current-theme">
+    <h2>{{ theme.themeName }}</h2>
     <span>Subscribers: {{ (theme?.subscribers || []).length || 0 }}</span>
 
+    <app-empty-post *ngIf="!areTherePosts"></app-empty-post>
 
-    @for (post of theme.posts; track $index) {
-    <div class="posts">
-      <div class="post">
-        <h3 class="post-title">{{ post?.text }}</h3>
-        <p class="post-content">{{ post?.content }}</p>
-  
-        <div class="post-info">
-          <span class="post-date">Posted on: {{ post?.created_at }}</span>
-          <span class="post-likes">Likes: {{ post?.likes?.length || 0 }} 
-            @if (!isPostLikedByUser(post)) {
-              <i 
-                class="fa-regular fa-heart" 
-                (click)="likeAPost(post._id, post)">
-              </i>
-            } @else {
-              <i 
-                class="fa-solid fa-heart">
-              </i>
-            }
+    <div *ngFor="let post of theme.posts; trackBy: trackById">
+      <div class="posts">
+        <div class="post">
+          <div class="top-part">
+            <div *ngIf="!isPostEditing(post._id)">
+              <h3 class="post-title">{{ post?.text }}</h3>
+            </div>
+
+            <div *ngIf="isPostEditing(post._id)">
+              <input
+                type="text"
+                [(ngModel)]="editText"
+                class="edit-input"
+                placeholder="Edit your post"
+              />
+            </div>
+
+            <!-- Show edit/remove buttons only if the post is by the current user -->
+            <div *ngIf="isOwner(post.userId._id)">
+              <div class="icon-holder">
+                <i
+                  class="fa-solid fa-xmark remove"
+                  (click)="removePost(theme._id, post._id, post.text)"
+                ></i>
+                <i
+                  class="fa-solid fa-pen-to-square"
+                  (click)="toggleEditMode(post)"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-info">
+            <span class="post-date">Posted on: {{ post?.created_at }}</span>
+            <span class="post-likes">
+              Likes: {{ post?.likes?.length || 0 }}
+              <i
+                class="fa-regular fa-heart"
+                *ngIf="!isPostLikedByUser(post)"
+                (click)="likeAPost(post._id, post)"
+              ></i>
+              <i class="fa-solid fa-heart" *ngIf="isPostLikedByUser(post)"></i>
             </span>
+          </div>
         </div>
       </div>
     </div>
-  }
-  <div class="btn-holder">
-  <a class="back-btn" (click)="goBack()">Back</a>
-</div>
+
+    <div class="btn-holder">
+      <a class="back-btn" (click)="goBack()">Back</a>
+      <a *ngIf="isLoggedIn" class="back-btn create" (click)="goToCreatePost()">Create post</a>
     </div>
-   
+  </div>
+</div>

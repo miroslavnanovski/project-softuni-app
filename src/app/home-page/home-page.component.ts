@@ -10,11 +10,12 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Activity } from '../types/activity';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
+import { LoaderComponent } from "../shared/loader/loader.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [PostCardComponent, HeaderComponent, HomeCardsComponent,CreatePostComponent,LoginPageComponent,CommonModule,RouterLink,FormsModule],
+  imports: [PostCardComponent, HeaderComponent, HomeCardsComponent, CreatePostComponent, LoginPageComponent, CommonModule, RouterLink, FormsModule, LoaderComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
@@ -26,6 +27,8 @@ export class HomePageComponent implements OnInit{
   filterUsername = '';
   currentIndex:number = 0;  // Keeps track of where we are in the activities array
   postsPerPage:number = 5;
+  isLoading:boolean = true;
+
 
 
   constructor(private userService:userService,private ActivityLoggerService:ActivityLoggerService,private router:Router ){}
@@ -33,6 +36,10 @@ export class HomePageComponent implements OnInit{
   ngOnInit(): void {
     this.activities = this.ActivityLoggerService.getActivities();
     this.loadIndexFromLocalStorage();
+
+    setTimeout(() =>{
+      this.isLoading = false;
+    },500 )
   }
 
   get isLoggedIn():boolean {

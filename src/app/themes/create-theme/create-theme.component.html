@@ -1,4 +1,4 @@
-
+<div class="wrapper">
 <div class="create-theme-container">
     <h2>Create a New Theme</h2>
     <form [formGroup]="creationForm" (ngSubmit)="createForm()" class="create-theme-form">
@@ -11,6 +11,9 @@
          required 
          formControlName="themeName"
          />
+         <div *ngIf="isDuplicate" style="color: red;">
+          A theme with this name already exists. Please choose another name.
+        </div>
       </div>
       <div class="form-group">
         <label for="theme-description">Description</label>
@@ -26,3 +29,5 @@
       <button type="submit" class="submit-btn">Create Theme</button>
     </form>
   </div>
+
+</div>

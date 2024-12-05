@@ -51,7 +51,7 @@ export class ApiService {
   postComment(postText:string,themeId:string){
     const payload = {postText};
 
-    return this.http.post(`/api/themes/${themeId}`,payload)
+    return this.http.post<Post>(`/api/themes/${themeId}`,payload)
 
   }
 
@@ -65,4 +65,19 @@ export class ApiService {
     );
   }
 
+  deletePost(themeId:string,postId:string){
+    return this.http.delete(`/api/themes/${themeId}/posts/${postId}`)
+  }
+
+  updatePost(postText: string, themeId: string, postId: string) {
+    const updatedData = { postText: postText }; // Payload containing the updated post text
+  
+    return this.http.put(`/api/themes/${themeId}/posts/${postId}`, updatedData).pipe(
+      catchError((error) => {
+        console.error('Error updating post:', error); // Corrected error message
+        return throwError(() => new Error('Failed to update the post.')); // Rethrow error with a custom message
+      })
+    );
+  }
+  
 }

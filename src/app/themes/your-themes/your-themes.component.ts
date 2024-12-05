@@ -99,6 +99,9 @@ deleteTheme(themeId: string): void {
   if (themeToDelete) {
     const themeName = themeToDelete.themeName  || 'Unnamed Theme'; 
 
+    const isConfirmed = window.confirm(`Do you really want to delete the theme: "${themeName}"?`);
+
+    if(isConfirmed){
     this.apiService.deleteTheme(themeId).subscribe({
       next: () => {
         // Log the activity
@@ -130,6 +133,7 @@ deleteTheme(themeId: string): void {
   } else {
     console.warn('Theme not found!');
   }
+}
 }
 
 trackByIndex(index: number): number {

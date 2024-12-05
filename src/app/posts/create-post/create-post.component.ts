@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { userService } from '../../user/user-service.service';
 import { ApiService } from '../../api.service';
 import { Theme } from '../../types/themes';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { ActivityLoggerService } from '../../user/activity-logger.service';
 import { UserForAuth } from '../../types/user';
+import { Post } from '../../types/posts';
 
 @Component({
   selector: 'app-create-post',
@@ -21,8 +22,14 @@ export class CreatePostComponent implements OnInit {
   username:string = '';
   user:UserForAuth | null = null;
   userId:string = '';
+  areTherePosts: boolean = true;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router:Router,private userService:userService,private activityLoggerService:ActivityLoggerService) {}
+  constructor(private route: ActivatedRoute,
+     private apiService: ApiService,
+      private router:Router,
+      private userService:userService,
+      private activityLoggerService:ActivityLoggerService,
+      private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -44,15 +51,34 @@ export class CreatePostComponent implements OnInit {
   postComment(form: NgForm) {
     if (form.valid) {
       const commentText = form.value.body;
-      
-      
-      
-      this.apiService.postComment(commentText,this.themeId).subscribe(response => {
-        this.activityLoggerService.logActivity(`created a post:${commentText}`,this.userId,this.username);
-      })
-      this.router.navigate([`${this.username}/themes`])
+  
+      // Post the comment to the server
+      this.apiService.postComment(commentText, this.themeId).subscribe({
+        next: (response: Post) => { // Explicitly type the response as Post
+          const newPost = response; // Now response is typed as Post
+  
+          // Add the new post to the local posts array
+          this.theme.posts.push(newPost);
+          this.areTherePosts = this.theme.posts.length > 0; // Update the flag if posts exist
+  
+          // Log the activity
+          this.activityLoggerService.logActivity(`created a post: ${commentText}`, this.userId, this.username);
+  
+          // Manually trigger change detection to update the UI immediately
+          this.cdr.detectChanges();
+  
+          // Optionally navigate after the UI is updated (without a full page refresh)
+          this.router.navigate([`/themes/${this.themeId}`]);
+        },
+        error: (error) => {
+          console.error('Failed to post comment:', error);
+        }
+      });
     } else {
       console.log('Form is invalid.');
     }
   }
+  
+  
+  
 }

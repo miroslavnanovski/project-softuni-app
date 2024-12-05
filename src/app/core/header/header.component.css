@@ -1,14 +1,20 @@
-/* Header */
+/* General Header Styles */
 header {
-  background-color: #333;
+  background-color: #333333;
   padding: 15px 20px;
 }
 
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between; /* Space between logo and menu items */
   gap: 40px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .logo a {
@@ -42,7 +48,7 @@ header {
   width: 200px;
 }
 
-.logo:hover{
+.logo:hover {
   cursor: pointer;
 }
 
@@ -57,7 +63,7 @@ li {
 }
 
 .menu-holder {
- display: flex;
+  display: flex;
 }
 
 .down {
@@ -75,10 +81,23 @@ li {
   gap: 20px;
 }
 
-@media(max-width:1920px) {
+@media(max-width: 1920px) {
   .down {
     position: absolute;
     right: 35px;
     top: 60px;
   }
+}
+
+/* Additional styling for logo positioning */
+.logo-container {
+  flex-grow: 1;
+}
+
+.navbar .logo-container a {
+  text-align: left; /* Align logo to the left */
+}
+
+.logo {
+  width: 50px;
 }

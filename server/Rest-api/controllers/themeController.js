@@ -1,5 +1,6 @@
-const { themeModel } = require('../models');
+
 const { newPost } = require('./postController')
+const { postModel, themeModel, userModel } = require('../models');
 
 function getThemes(req, res, next) {
     themeModel.find()
@@ -48,41 +49,43 @@ function deleteTheme(req, res, next) {
   const { themeId } = req.params;
   const { _id: userId } = req.user;
 
-  console.log(`Request to delete theme: ${themeId}, by user: ${userId}`);
+  console.log(`Received request to delete theme with ID: ${themeId} by user: ${userId}`);
 
   themeModel
     .findOneAndDelete({ _id: themeId, userId })
     .then((deletedTheme) => {
       if (!deletedTheme) {
-        console.warn('Unauthorized attempt to delete theme');
+        console.warn(`Unauthorized attempt to delete theme: ${themeId}`);
         return res.status(401).json({ message: 'Not allowed!' });
       }
 
-      console.log('Theme deleted:', deletedTheme);
+      console.log('Theme deleted successfully:', deletedTheme);
 
-      // Proceed to delete related posts
-      return postModel.deleteMany({ themeId }).then(() => {
-        console.log('Related posts deleted successfully');
-        return res.status(200).json({
-          message: 'Theme and related posts deleted successfully!',
+      // Delete related posts using deleteMany
+      return postModel
+        .deleteMany({ themeId }) // Deletes all posts with the given themeId
+        .then((result) => {
+          console.log(`Deleted ${result.deletedCount} posts related to theme: ${themeId}`);
+          res.status(200).json({ message: 'Theme and related posts deleted successfully!' });
+        })
+        .catch((err) => {
+          console.error('Error deleting related posts:', err);
+          res.status(500).json({
+            message: 'Error deleting related posts',
+            error: err.message,
+          });
         });
-      }).catch((err) => {
-        // Log any error that might happen while deleting posts
-        console.error('Error deleting related posts:', err);
-        return res.status(500).json({
-          message: 'Failed to delete related posts',
-          error: err.message || 'Unexpected error',
-        });
-      });
     })
     .catch((err) => {
-      console.error('Error during deleteTheme:', err);
-      return res.status(500).json({
-        message: 'Internal Server Error',
-        error: err.message || 'Unexpected error',
+      console.error('Error deleting theme:', err);
+      res.status(500).json({
+        message: 'Error deleting theme',
+        error: err.message,
       });
     });
 }
+
+
   
 
 module.exports = {

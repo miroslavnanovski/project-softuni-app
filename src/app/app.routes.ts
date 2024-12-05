@@ -15,26 +15,30 @@ import { ChangePasswordComponent } from './user/user-profile/change-password/cha
 import { YourThemesComponent } from './themes/your-themes/your-themes.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 
+
 export const routes: Routes = [
-    {path:'', redirectTo: '/home', pathMatch:'full'},
-    {path:'home',component:HomePageComponent},
-    {path:'about', component:AboutPageComponent},
-    {path: 'posts', component:PostsPageComponent},
-    {path: 'contact', component:ContactPageComponent},
-    {path: 'register', component:RegisterPageComponent},
-    {path: 'login', component:LoginPageComponent},
-    {path:':username/themes', component:YourThemesComponent},
-    {path:':username/themes/:themeId/create-post', component:CreatePostComponent},
-    {path:':username/themes/:themeId',component:CurrentThemeComponent},
-    {path:'create-theme', component:CreateThemeComponent},
-    {path:'profile-settings', component:ProfileSettingsComponent},
-    {path:'change-password', component:ChangePasswordComponent},
-    {path: 'themes', 
-        children:[
-            {path:'',component:ThemesPageComponent},
-            // {path:':themeId', component:CurrentThemeComponent},
-        ]
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomePageComponent },
+    { path: 'about', component: AboutPageComponent },
+    { path: 'posts', component: PostsPageComponent },
+    { path: 'contact', component: ContactPageComponent },
+    { path: 'register', component: RegisterPageComponent },
+    { path: 'login', component: LoginPageComponent },
+    { path: ':username/themes', component: YourThemesComponent },
+    { path: ':username/themes/:themeId/create-post', component: CreatePostComponent },
+    { path: 'themes/:themeId/create-post', component: CreatePostComponent },
+    { path: ':username/themes/:themeId', component: CurrentThemeComponent }, // User themes
+    { path: 'themes/:themeId', component: CurrentThemeComponent }, // General themes
+    { path: 'create-theme', component: CreateThemeComponent },
+    { path: 'profile-settings', component: ProfileSettingsComponent },
+    { path: 'change-password', component: ChangePasswordComponent },
+    { path: 'themes', 
+      children: [
+        { path: '', component: ThemesPageComponent },
+        { path: ':themeId', component: CurrentThemeComponent },
+      ]
     },
+  
    
     
     // {path:'404',component:ErrorComponent},

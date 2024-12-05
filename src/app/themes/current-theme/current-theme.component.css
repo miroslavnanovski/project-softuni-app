@@ -47,6 +47,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .back-btn {
@@ -61,4 +62,35 @@ h2 {
   align-items: center;
   width: 100px;
   cursor: pointer;
+}
+
+.top-part {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-solid.fa-xmark.remove:hover {
+  cursor: pointer;
+  color: red;
+  
+}
+
+.back-btn.create {
+  width: 200px;
+  
+}
+
+.icon-holder {
+  display: flex;
+  gap: 10px;
+}
+
+.fa-solid.fa-pen-to-square:hover{
+color: #007bff;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

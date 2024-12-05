@@ -45,21 +45,22 @@
           </div>
         </div>
       </ul>
+      <div class="btn-holder">
+        <!-- Load More Button (Older posts) -->
+        <button *ngIf="currentIndex + postsPerPage < activities.length" (click)="loadMore()" class="load-more">
+          Load Older Posts
+          <i class="fa-solid fa-arrow-down"></i>
+        </button>
+    
+        <!-- Load Newer Button (Newer posts) -->
+        <button *ngIf="currentIndex > 0" (click)="loadNewer()" class="load-newer">
+          Load Newer Posts
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
     </ng-template>
 
-    <div class="btn-holder">
-    <!-- Load More Button (Older posts) -->
-    <button *ngIf="currentIndex + postsPerPage < activities.length" (click)="loadMore()" class="load-more">
-      Load Older Posts
-      <i class="fa-solid fa-arrow-down"></i>
-    </button>
-
-    <!-- Load Newer Button (Newer posts) -->
-    <button *ngIf="currentIndex > 0" (click)="loadNewer()" class="load-newer">
-      Load Newer Posts
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
-  </div>
+    
   </div>
 
   <!-- Latest Updates Section -->
