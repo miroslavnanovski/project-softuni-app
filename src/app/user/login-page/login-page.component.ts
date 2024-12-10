@@ -5,6 +5,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
 import { EmailValidatorDirective } from '../../directives/email.directive';
 import { PasswordValidatorDirective } from '../../directives/password.directive';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -17,25 +19,39 @@ import { PasswordValidatorDirective } from '../../directives/password.directive'
 
 export class LoginPageComponent {
 
+  errorMessage: string = '';
+
   constructor(private userService:userService, private router: Router){}
 
   login(form: NgForm) {
-    if (form.valid) {
-      console.log('Form Submitted:', form.value);
-    } else {
+    if (form.invalid) {
       console.log('Form is invalid.');
+      return;
     }
 
+
+    this.errorMessage = ''; 
     const {email, password} = form.value;
 
 
-    this.userService.login(email,password).subscribe(()=>{
-      
-      this.router.navigate(['/home'])
+    this.userService.login(email, password).pipe(
+      catchError((err) => {
+        // Handle errors
+        if (err && err.error && err.error.message) {
+          this.errorMessage = err.error.message; 
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+        return of(null); // Return null to prevent further propagation
+      })
+    ).subscribe({
+      next: (response) => {
+        if (response) { // Only navigate if the response is valid
+          this.router.navigate(['/home']);
+        }
+      }
     });
-    
   }
-
   
 }
 

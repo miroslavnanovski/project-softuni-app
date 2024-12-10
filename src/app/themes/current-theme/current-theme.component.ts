@@ -9,6 +9,7 @@ import { UserForAuth } from '../../types/user';
 import { ActivityLoggerService } from '../../user/activity-logger.service';
 import { EmptyPostComponent } from "../../posts/post-card/empty-post/empty-post.component";
 import { FormsModule } from '@angular/forms';
+import { catchError, throwError } from 'rxjs';
 
 
 
@@ -27,6 +28,9 @@ export class CurrentThemeComponent implements OnInit {
   areTherePosts:boolean = true;
   isLoggedIn:boolean = false;
   isUserTheme: boolean = false;
+  isValid: boolean = false;
+  subscribedTheme:string [] = [];
+  isSubscribed:boolean = false;
 
 
   editingState = new Map<string, boolean>(); // Map to track the editing state of each post
@@ -52,7 +56,7 @@ export class CurrentThemeComponent implements OnInit {
   
 ngOnInit(): void {
   const id = this.route.snapshot.params['themeId'];
-
+  
  
   this.apiService.getSingleTheme(id).subscribe(themeData => {
     this.theme = themeData;
@@ -60,6 +64,7 @@ ngOnInit(): void {
     this.theme.subscribers = this.theme.subscribers || [];
     this.areTherePosts = this.posts.length > 0;
 
+    this.checkSubscriptionStatus(this.theme._id);
 
     // Initialize the liked flag for each post (false by default)
     this.posts.forEach(post => {
@@ -182,4 +187,47 @@ trackById(index: number, post: any): string {
   return post._id;
 }
 
+
+subscribeToTheme(themeId: string) {
+  // Get the list of subscribed themes from localStorage for the current user
+  const subscribedThemes = JSON.parse(localStorage.getItem(`subscribedThemes_${this.userId}`) || '[]');
+  
+  // Check if the theme is not already subscribed
+  if (!subscribedThemes.includes(themeId)) {
+    // Make an API call to subscribe to the theme
+    this.apiService.subscribeToTheme(themeId).subscribe({
+      next: () => {
+        // Successfully subscribed to the theme, add it to localStorage
+        subscribedThemes.push(themeId);
+        localStorage.setItem(`subscribedThemes_${this.userId}`, JSON.stringify(subscribedThemes));
+        // Update the UI subscription state
+        this.isSubscribed = true;
+
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error subscribing to theme', error);
+      }
+    });
+  } else {
+    // If already subscribed, just update the UI state
+    this.isSubscribed = true;
+    this.cdr.detectChanges();
+  }
 }
+loadTheme(themeId: string) {
+  this.apiService.getSingleTheme(themeId).subscribe((updatedTheme: any) => {
+    this.theme = updatedTheme; // Update the local theme state
+  });
+}
+
+checkSubscriptionStatus(themeId: string) {
+  const subscribedThemes = JSON.parse(localStorage.getItem(`subscribedThemes_${this.userId}`) || '[]');
+  this.isSubscribed = subscribedThemes.includes(themeId);;
+  
+  this.isSubscribed = subscribedThemes.includes(themeId);
+}
+
+}
+
+

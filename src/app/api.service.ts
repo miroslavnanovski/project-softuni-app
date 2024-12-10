@@ -79,5 +79,15 @@ export class ApiService {
       })
     );
   }
+
+  subscribeToTheme(themeId: string) {
+    return this.http.put(`/api/themes/${themeId}`, {}).pipe(
+      catchError(error => {
+        console.error('Error subscribing to theme', error);
+        return throwError(() => error);
+      })
+    );
+  }
+  
   
 }

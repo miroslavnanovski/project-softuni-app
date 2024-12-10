@@ -49,6 +49,10 @@
       <button [disabled]="form.invalid"
       [ngClass]="{ 'disabled-button': form.invalid }"
       >Login</button>
+       <!-- Display error message if any -->
+    <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
     </form>
   </div>
 

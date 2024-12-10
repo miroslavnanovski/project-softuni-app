@@ -94,3 +94,48 @@ color: #007bff;
   flex-direction: column;
   min-height: 100vh;
 }
+
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Adjust based on your icon size */
+  height: 50px; /* Adjust based on your icon size */
+}
+
+.default-icon {
+  font-size: 38px;
+  color: #007bff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hover-icon {
+  font-size: 38px;
+  color: #007bff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.icon-container:hover .default-icon {
+  opacity: 0;
+}
+
+.icon-container:hover .hover-icon {
+  opacity: 1;
+}
+
+.solid {
+  opacity: 1;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Post } from '../../types/posts';
 import { LoaderComponent } from '../../shared/loader/loader.component';
@@ -14,6 +14,8 @@ import { EmptyPostComponent } from './empty-post/empty-post.component';
   styleUrl: './post-card.component.css'
 })
 export class PostCardComponent implements OnInit {
+  @Input() post: Post | undefined;
+
   posts: Post[] = [];
   isLoading = true;
  

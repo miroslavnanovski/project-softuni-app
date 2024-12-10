@@ -14,34 +14,33 @@ import { ProfileSettingsComponent } from './user/user-profile/profile-settings/p
 import { ChangePasswordComponent } from './user/user-profile/change-password/change-password.component';
 import { YourThemesComponent } from './themes/your-themes/your-themes.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
+import { AuthGuard } from './utils/auth.guard';
+import { GuestGuard } from './utils/guest.guard';
+import { ErrorMessageComponent } from './shared/error/error-message/error-message.component';
 
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomePageComponent },
-    { path: 'about', component: AboutPageComponent },
-    { path: 'posts', component: PostsPageComponent },
-    { path: 'contact', component: ContactPageComponent },
-    { path: 'register', component: RegisterPageComponent },
-    { path: 'login', component: LoginPageComponent },
-    { path: ':username/themes', component: YourThemesComponent },
-    { path: ':username/themes/:themeId/create-post', component: CreatePostComponent },
-    { path: 'themes/:themeId/create-post', component: CreatePostComponent },
-    { path: ':username/themes/:themeId', component: CurrentThemeComponent }, // User themes
-    { path: 'themes/:themeId', component: CurrentThemeComponent }, // General themes
-    { path: 'create-theme', component: CreateThemeComponent },
-    { path: 'profile-settings', component: ProfileSettingsComponent },
-    { path: 'change-password', component: ChangePasswordComponent },
-    { path: 'themes', 
-      children: [
-        { path: '', component: ThemesPageComponent },
-        { path: ':themeId', component: CurrentThemeComponent },
-      ]
-    },
-  
-   
-    
-    // {path:'404',component:ErrorComponent},
-    // {path: '**', redirectTo:'/404'}
-
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent }, 
+  { path: 'about', component: AboutPageComponent }, 
+  { path: 'posts', component: PostsPageComponent, canActivate: [AuthGuard] }, 
+  { path: 'register', component: RegisterPageComponent, canActivate: [GuestGuard] },
+  { path: 'login', component: LoginPageComponent, canActivate: [GuestGuard] }, 
+  { path: ':username/themes', component: YourThemesComponent, canActivate: [AuthGuard] }, 
+  { path: ':username/themes/:themeId/create-post', component: CreatePostComponent, canActivate: [AuthGuard] }, 
+  { path: 'themes/:themeId/create-post', component: CreatePostComponent, canActivate: [AuthGuard] }, 
+  { path: ':username/themes/:themeId', component: CurrentThemeComponent, canActivate: [AuthGuard] },
+  { path: 'themes/:themeId', component: CurrentThemeComponent, canActivate: [AuthGuard] }, 
+  { path: 'create-theme', component: CreateThemeComponent, canActivate: [AuthGuard] },
+  { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] }, 
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'themes', 
+    children: [
+      { path: '', component: ThemesPageComponent },
+      { path: ':themeId', component: CurrentThemeComponent, canActivate: [AuthGuard] },
+    ]
+  },
+  {path: 'error', component:ErrorMessageComponent},
+  { path: '**', component:ErrorComponent} // Catch-all route for 404s
 ];

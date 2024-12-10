@@ -12,7 +12,7 @@
 /* Login Section */
 .login-section {
   flex: 1;
-  max-width: 25%;
+  max-width: 100%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -215,7 +215,7 @@
   color: black;
   margin-bottom: 15px;
   text-align: center;
-  border-bottom: 2px solid #ddd;
+ 
   padding-bottom: 5px;
 }
 
@@ -376,3 +376,129 @@ button i {
 display: flex;
 justify-content: space-between;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin: 24px auto;
+}
+
+.subscribed-themes-panel {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.subscribed-themes-panel h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.no-themes {
+  color: #666;
+  font-style: italic;
+  display: none; /* Hide by default if you have themes listed */
+}
+
+.themes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.theme-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.theme-item h5 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.theme-item p {
+  margin: 0 0 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.theme-item .btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.theme-item .btn:hover {
+  background-color: #0056b3;
+}
+
+.theme-item:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.left-side-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.heading-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.heading-holder h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.filter-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.filter-icon:hover {
+  color: #0056b3;
+}
+
+.filter-menu {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.filter-menu label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.filter-menu select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+

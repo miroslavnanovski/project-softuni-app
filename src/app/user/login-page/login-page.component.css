@@ -89,3 +89,8 @@
   cursor: not-allowed; 
   border: 1px solid #ccc;
 }
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+}

@@ -4,6 +4,7 @@
         padding: 15px;
         position: relative;
         z-index: 1000;    
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
 
   .user-profile-header {

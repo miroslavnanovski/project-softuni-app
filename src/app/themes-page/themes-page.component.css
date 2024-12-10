@@ -85,3 +85,26 @@
   margin: 0 10px;
   cursor: pointer;
 }
+
+.next {
+  background-color: #007bff;
+  color: white;
+}
+
+a {
+  padding: 20px 40px;
+  font-size: 21px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  
+}
+
+a:hover {
+  background-color: #0056b3;
+  color: white;
+}

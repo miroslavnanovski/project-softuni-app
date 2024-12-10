@@ -13,7 +13,7 @@
   </div>
 
   <div class="pagination">
-    <button *ngIf="currentPage > 1" (click)="previousPage()">Previous</button>
-    <button *ngIf="currentPage * itemsPerPage < themes.length" (click)="nextPage()">Next</button>
+    <a *ngIf="currentPage > 1" (click)="previousPage()" class="next">Previous</a>
+    <a *ngIf="currentPage * itemsPerPage < themes.length" (click)="nextPage()" class="next">Next</a>
   </div>
 </div>

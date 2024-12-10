@@ -1,7 +1,18 @@
 <div class="wrapper">
   <div class="current-theme">
-    <h2>{{ theme.themeName }}</h2>
+    <div class="heading">
+      <h2>{{ theme?.themeName }}</h2>
+      <div class="icon-container" (click)="subscribeToTheme(theme._id)">
+        @if(isSubscribed){
+          <i class="fa-solid fa-bell custom-size hover-icon solid"></i>
+        }@else {
+          <i class="fa-regular fa-bell custom-size default-icon"></i>
+          <i class="fa-solid fa-bell custom-size hover-icon"></i>
+        }
+      </div>
+    </div>
     <span>Subscribers: {{ (theme?.subscribers || []).length || 0 }}</span>
+ 
 
     <app-empty-post *ngIf="!areTherePosts"></app-empty-post>
 

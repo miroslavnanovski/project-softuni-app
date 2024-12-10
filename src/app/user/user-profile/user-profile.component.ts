@@ -31,6 +31,8 @@ export class UserProfileComponent implements OnInit{
       }
     });
   }
+
+  
   
   logout() {
     localStorage.removeItem('userData');

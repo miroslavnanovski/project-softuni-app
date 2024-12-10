@@ -1,75 +1,102 @@
 <div class="front-page">
-  @if(!isLoggedIn){
-  <div class="login-section">
-    <app-login-page />
-  </div>
+  <div class="left-side-wrapper">
+  @if (!isLoggedIn) {
+    <div class="login-section">
+      <app-login-page class="small-login"></app-login-page>
+    </div>
   } @else {
-  <div class="login-section">
-    <div class="welcome-panel">
-      <h3>Welcome, {{username}}!</h3>
-      <p>This is your personalized forum management dashboard!</p>
-      <p>You can manage posts, themes, and users from the menu above.</p>
-      <div class="quick-links">
-        <h4>Quick Actions</h4>
-        <button class="btn" routerLink="/create-theme">Create Theme</button>
-        <button class="btn" (click)="manageThemes()">Manage Themes</button>
+    <div class="login-section">
+      <div class="welcome-panel">
+        <h3>Welcome, {{ username }}!</h3>
+        <p>This is your personalized forum management dashboard!</p>
+        <p>You can manage posts, themes, and users from the menu above.</p>
+        <div class="quick-links">
+          <h4>Quick Actions</h4>
+          <button class="btn" routerLink="/create-theme">Create Theme</button>
+          <button class="btn" (click)="manageThemes()">Manage Themes</button>
+        </div>
       </div>
     </div>
-  </div>
   }
+
+</div>
 
   <!-- News Feed Section -->
   <div class="news-feed">
     <div class="heading-holder">
-      <h2>Activity feed
-        <i class="fa-solid fa-filter"></i>
+      <h2>
+        Activity Feed
       </h2>
+      <i class="fa-solid fa-filter filter-icon" (click)="toggleFilterMenu()"></i>
     </div>
 
-    <div *ngIf="activities.length === 0; else activityList">
+    <div class="filter-menu" *ngIf="isFilterMenuOpen">
+      <label for="userFilter">Filter by User:</label>
+      <select id="userFilter" [(ngModel)]="selectedUserId" (change)="onFilterChange()">
+        <option value="">All Users</option>
+        <option *ngFor="let user of uniqueUsers" [value]="user.id">
+          {{ user.name }}
+        </option>
+      </select>
+    </div>
+
+    @if (activities.length === 0) {
       <p>No activities yet. Start interacting to see your log here!</p>
-    </div>
-
-    <ng-template #activityList>
+    } @else {
       <ul>
-        <div class="feed-item" *ngFor="let activity of displayedActivities">
-          <div class="feed-item-content">
-            <!-- Display user profile picture -->
-            <img src="/images/1_PiHoomzwh9Plr9_GA26JcA.png" alt="User Profile Picture" class="profile-pic" />
-
-            <!-- Activity details -->
-            <div class="activity-details">
-              <p><strong>{{activity.user.name}}</strong>: {{ activity.message }}</p>
-              <small>{{ activity.timestamp | date: 'short' }}</small>
-            </div>
-          </div>
-        </div>
+          @for (activity of displayedActivities; track activity.timestamp) {
+            @if(isLoading){
+              <div class="feed-item">
+              <app-loader class="loading"/>
+              </div>
+            } @else {
+              <div class="feed-item">
+                <div class="feed-item-content">
+                  <!-- Display user profile picture -->
+                  <img
+                    src="/images/1_PiHoomzwh9Plr9_GA26JcA.png"
+                    alt="User Profile Picture"
+                    class="profile-pic"
+                  />
+  
+                  <!-- Activity details -->
+                  <div class="activity-details">
+                    <p><strong>{{ activity.user.name }}</strong>: {{ activity.message }}</p>
+                    <small>{{ activity.timestamp | date: 'short' }}</small>
+                  </div>
+                </div>
+              </div>
+            }
+          }
+        
       </ul>
       <div class="btn-holder">
         <!-- Load More Button (Older posts) -->
-        <button *ngIf="currentIndex + postsPerPage < activities.length" (click)="loadMore()" class="load-more">
-          Load Older Posts
-          <i class="fa-solid fa-arrow-down"></i>
-        </button>
-    
-        <!-- Load Newer Button (Newer posts) -->
-        <button *ngIf="currentIndex > 0" (click)="loadNewer()" class="load-newer">
-          Load Newer Posts
-          <i class="fa-solid fa-arrow-up"></i>
-        </button>
-      </div>
-    </ng-template>
+        @if (currentIndex + postsPerPage < activities.length) {
+          <button (click)="loadMore()" class="load-more">
+            Load Older Posts
+            <i class="fa-solid fa-arrow-down"></i>
+          </button>
+        }
 
-    
+        <!-- Load Newer Button (Newer posts) -->
+        @if (currentIndex > 0) {
+          <button (click)="loadNewer()" class="load-newer">
+            Load Newer Posts
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        }
+      </div>
+    }
   </div>
 
   <!-- Latest Updates Section -->
   <div class="latest-updates">
     <h2>Latest Posts</h2>
     <ul>
-      <li>
-        <app-post-card />
-      </li>
+        <li>
+          <app-post-card></app-post-card>
+        </li>
     </ul>
   </div>
 </div>
