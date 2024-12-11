@@ -35,8 +35,11 @@ A modern and responsive forum and post management system built with Angular for 
 2. **Restore the Database**:
    ```bash
    1.Locate the Database Files Navigate to the folder containing the database dump files: server/resources/forum.
-    2.Run the Restore Command Open a terminal or command prompt and execute the following command:mongorestore -d forum C:\path\to\the\database\files <- (example path) 
+   
+    2.Run the Restore Command Open a terminal or command prompt and execute the following command:mongorestore -d forum C:\path\to\the\database\files <- (example path)
+   
     Replace C:\path\to\the\database\files with the actual path to the folder where the database files are located.
+   
     Once the command completes successfully, the database named forum will be restored and ready for use by the application
    ```
 
