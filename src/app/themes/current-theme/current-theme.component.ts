@@ -82,6 +82,7 @@ ngOnInit(): void {
       const username = this.user.username;
       this.username = username;
     
+      this.checkSubscriptionStatus(id);
 
       
 }});   
@@ -189,44 +190,45 @@ trackById(index: number, post: any): string {
 
 
 subscribeToTheme(themeId: string) {
-  // Get the list of subscribed themes from localStorage for the current user
   const subscribedThemes = JSON.parse(localStorage.getItem(`subscribedThemes_${this.userId}`) || '[]');
-  
-  // Check if the theme is not already subscribed
+
   if (!subscribedThemes.includes(themeId)) {
-    // Make an API call to subscribe to the theme
     this.apiService.subscribeToTheme(themeId).subscribe({
       next: () => {
-        // Successfully subscribed to the theme, add it to localStorage
+        // Add to localStorage
         subscribedThemes.push(themeId);
         localStorage.setItem(`subscribedThemes_${this.userId}`, JSON.stringify(subscribedThemes));
-        // Update the UI subscription state
-        this.isSubscribed = true;
 
-        this.cdr.detectChanges();
+        this.activityLoggerService.logActivity(
+          `subscribed to theme: ${this.theme.themeName}!`,
+          this.userId,
+          this.username
+        );
+
+        // Update theme subscribers dynamically
+        this.theme.subscribers.push(this.userId); // Add current user to the subscribers list
+        this.isSubscribed = true;
+        this.cdr.detectChanges(); // Trigger change detection to update UI
       },
       error: (error) => {
-        console.error('Error subscribing to theme', error);
-      }
+        console.error('Error subscribing to theme:', error);
+      },
     });
-  } else {
-    // If already subscribed, just update the UI state
-    this.isSubscribed = true;
-    this.cdr.detectChanges();
   }
 }
+
+checkSubscriptionStatus(themeId: string) {
+  const subscribedThemes = JSON.parse(localStorage.getItem(`subscribedThemes_${this.userId}`) || '[]');
+  this.isSubscribed = subscribedThemes.includes(themeId);
+}
+
+
 loadTheme(themeId: string) {
   this.apiService.getSingleTheme(themeId).subscribe((updatedTheme: any) => {
     this.theme = updatedTheme; // Update the local theme state
   });
 }
 
-checkSubscriptionStatus(themeId: string) {
-  const subscribedThemes = JSON.parse(localStorage.getItem(`subscribedThemes_${this.userId}`) || '[]');
-  this.isSubscribed = subscribedThemes.includes(themeId);;
-  
-  this.isSubscribed = subscribedThemes.includes(themeId);
-}
 
 }
 

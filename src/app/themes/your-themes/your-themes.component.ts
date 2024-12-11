@@ -104,7 +104,7 @@ deleteTheme(themeId: string): void {
     if(isConfirmed){
     this.apiService.deleteTheme(themeId).subscribe({
       next: () => {
-        // Log the activity
+        
         this.activityLoggerService.logActivity(`deleted the theme: "${themeName}"`,this.currentUserId,this.currentUsername);
 
         // Update the theme arrays
@@ -122,7 +122,7 @@ deleteTheme(themeId: string): void {
         console.error('Error deleting theme:', err);
         if (err.status === 500) {
           console.warn('Theme deleted, but backend reported an error.');
-          // Force UI update even if backend reports 500
+        
           this.userThemes = this.userThemes.filter((theme) => theme._id !== themeId);
           
           // Update the empty state

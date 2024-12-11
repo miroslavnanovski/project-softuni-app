@@ -58,9 +58,9 @@ createForm() {
     );
 
     if (isDuplicate) {
-      this.isDuplicate = true; // Set the duplicate flag to show an error in the template
+      this.isDuplicate = true; 
       console.error('A theme with this name already exists.');
-      return; // Stop further execution if a duplicate is found
+      return; 
     }
 
     // If not a duplicate, proceed with theme creation
@@ -74,7 +74,7 @@ createForm() {
 
         this.themeCreated.emit(newTheme); // Emit the newly created theme
 
-        // Navigate to the user's themes page
+        
         this.router.navigate([`${this.currentUsername}/themes`]);
       },
       error: (err) => {

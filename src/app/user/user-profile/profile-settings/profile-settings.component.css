@@ -55,7 +55,7 @@
   color: #333333;
 }
 
-/* Buttons */
+
 button.edit-button,
 button.save-button,
 button.cancel-button {
@@ -97,7 +97,7 @@ button.cancel-button:hover {
   background-color: #bd2130;
 }
 
-/* Input fields in edit form */
+
 form .form-group {
   margin-bottom: 15px;
   text-align: left;

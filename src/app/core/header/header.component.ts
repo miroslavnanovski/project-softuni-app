@@ -19,11 +19,11 @@ export class HeaderComponent {
   constructor(private userService:userService,private router:Router,private eRef: ElementRef){}
 
 
-  get isLoggedIn():boolean {
+  get isLoggedIn(): boolean {
     return this.userService.isLoggedIn;
   }
 
-  get username():string {
+  get username(): string {
     return this.userService.user?.username || '';
   }
 

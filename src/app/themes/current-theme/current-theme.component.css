@@ -105,8 +105,9 @@ color: #007bff;
 .icon-container {
   position: relative;
   display: inline-block;
-  width: 50px; /* Adjust based on your icon size */
-  height: 50px; /* Adjust based on your icon size */
+  width: 50px;
+  height: 50px;
+  cursor: pointer; 
 }
 
 .default-icon {
@@ -115,6 +116,7 @@ color: #007bff;
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 1; /* Default icon should always be visible unless hovered or subscribed */
   transition: opacity 0.3s ease-in-out;
 }
 
@@ -124,18 +126,38 @@ color: #007bff;
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
+  opacity: 0; /* Hover icon hidden by default */
   transition: opacity 0.3s ease-in-out;
 }
 
 .icon-container:hover .default-icon {
-  opacity: 0;
+  opacity: 0; 
 }
 
 .icon-container:hover .hover-icon {
-  opacity: 1;
+  opacity: 1; 
 }
 
 .solid {
-  opacity: 1;
+  opacity: 1
+}
+
+.solid.default-icon {
+  opacity: 0; 
+}
+
+
+.back-btn:focus, .icon-container:focus-within {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.post-info {
+
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.wrapper {
+  padding: 1rem;
 }

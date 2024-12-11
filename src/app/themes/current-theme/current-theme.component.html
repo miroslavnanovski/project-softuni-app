@@ -3,13 +3,16 @@
     <div class="heading">
       <h2>{{ theme?.themeName }}</h2>
       <div class="icon-container" (click)="subscribeToTheme(theme._id)">
-        @if(isSubscribed){
-          <i class="fa-solid fa-bell custom-size hover-icon solid"></i>
-        }@else {
-          <i class="fa-regular fa-bell custom-size default-icon"></i>
-          <i class="fa-solid fa-bell custom-size hover-icon"></i>
-        }
+        <i
+          class="fa-regular fa-bell custom-size default-icon"
+          [class.solid]="isSubscribed"
+        ></i>
+        <i
+          class="fa-solid fa-bell custom-size hover-icon"
+          [class.solid]="isSubscribed"
+        ></i>
       </div>
+      
     </div>
     <span>Subscribers: {{ (theme?.subscribers || []).length || 0 }}</span>
  
@@ -64,7 +67,7 @@
       </div>
     </div>
 
-    <div class="btn-holder">
+    <div *ngIf="areTherePosts" class="btn-holder">
       <a class="back-btn" (click)="goBack()">Back</a>
       <a *ngIf="isLoggedIn" class="back-btn create" (click)="goToCreatePost()">Create post</a>
     </div>

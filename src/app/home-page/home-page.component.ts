@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostCardComponent } from '../posts/post-card/post-card.component';
 import { HeaderComponent } from '../core/header/header.component';
-import { HomeCardsComponent } from "../shared/home-cards/home-cards.component";
 import { userService } from '../user/user-service.service';
 import { CreatePostComponent } from '../posts/create-post/create-post.component';
 import { LoginPageComponent } from '../user/login-page/login-page.component';
@@ -13,21 +12,21 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { LoaderComponent } from "../shared/loader/loader.component";
 import { Post } from '../types/posts';
 import { ApiService } from '../api.service';
-import { User, UserForAuth } from '../types/user';
-import { getCookie } from '../utils/cookie.util';
+import {  UserForAuth } from '../types/user';
+
+
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [PostCardComponent,
-     HeaderComponent, 
-     HomeCardsComponent, 
-     CreatePostComponent, 
-     LoginPageComponent, 
-     CommonModule, 
-     RouterLink, 
-     FormsModule, 
-     LoaderComponent],
+    HeaderComponent,
+    CreatePostComponent,
+    LoginPageComponent,
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    LoaderComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
@@ -53,7 +52,7 @@ export class HomePageComponent implements OnInit {
     private ActivityLoggerService: ActivityLoggerService,
     private router: Router,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Get activities and unique users
@@ -68,33 +67,34 @@ export class HomePageComponent implements OnInit {
       this.isLoading = false;
     }, 500);
 
-    
+
     // Get user profile
-    if(this.isAuthenticated()){
       if (!this.user) {
         this.userService.getProfile().subscribe({
           next: (userData: UserForAuth) => {
             this.user = userData;
             this.userId = this.user._id;
+
+
+
           },
           error: (err) => {
             console.error('Failed to fetch user profile:', err);
-            // Optionally handle the error (e.g., show a message)
+
           }
         });
       }
-    }
-  }
+    
 
-  isAuthenticated(): boolean {
-    const token = getCookie('auth-cookie');
-    return !!token; 
+
+
+
   }
 
   // Get unique users from activities
   getUniqueUsers(): any[] {
     const users = this.activities.map(log => log.user);
-    return Array.from(new Set(users.map(u => u.id))).map(id =>
+    return Array.from(new Set(users.map(u => u.id))).map(id => //Maps the unique IDs back to their corresponding user objects.
       users.find(user => user.id === id)
     );
   }

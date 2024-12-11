@@ -3,6 +3,7 @@ import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ActivityLoggerService } from './activity-logger.service';
+import { getCookie } from '../utils/cookie.util';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,17 @@ export class userService {
 
   get isLoggedIn():boolean {
     return !!this.user;
+    
   }
 
   constructor(private http:HttpClient,private activityLoggerService: ActivityLoggerService) {
     this.user$.subscribe((user) => {
       this.user = user;
     })
-  }
    
+  }
+
+
   login(email: string, password: string) {
     return this.http
       .post<UserForAuth>('/api/login', { email, password })

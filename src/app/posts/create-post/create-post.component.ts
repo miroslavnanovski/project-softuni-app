@@ -54,8 +54,8 @@ export class CreatePostComponent implements OnInit {
   
       // Post the comment to the server
       this.apiService.postComment(commentText, this.themeId).subscribe({
-        next: (response: Post) => { // Explicitly type the response as Post
-          const newPost = response; // Now response is typed as Post
+        next: (response: Post) => { 
+          const newPost = response; 
   
           // Add the new post to the local posts array
           this.theme.posts.push(newPost);
@@ -67,7 +67,7 @@ export class CreatePostComponent implements OnInit {
           // Manually trigger change detection to update the UI immediately
           this.cdr.detectChanges();
   
-          // Optionally navigate after the UI is updated (without a full page refresh)
+          
           this.router.navigate([`/themes/${this.themeId}`]);
         },
         error: (error) => {

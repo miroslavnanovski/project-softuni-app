@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
-
-import { PostsPageComponent } from './posts-page/posts-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-import { ContactPageComponent } from './contact-page/contact-page.component';
 import { RegisterPageComponent } from './user/register-page/register-page.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { CurrentThemeComponent } from './themes/current-theme/current-theme.component';
@@ -22,8 +19,7 @@ import { ErrorMessageComponent } from './shared/error/error-message/error-messag
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent }, 
-  { path: 'about', component: AboutPageComponent }, 
-  { path: 'posts', component: PostsPageComponent, canActivate: [AuthGuard] }, 
+  { path: 'about', component: AboutPageComponent },  
   { path: 'register', component: RegisterPageComponent, canActivate: [GuestGuard] },
   { path: 'login', component: LoginPageComponent, canActivate: [GuestGuard] }, 
   { path: ':username/themes', component: YourThemesComponent, canActivate: [AuthGuard] }, 
