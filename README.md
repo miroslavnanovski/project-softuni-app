@@ -32,25 +32,31 @@ A modern and responsive forum and post management system built with Angular for 
    git clone https://github.com/miroslavnanovski/project-softuni-app
    cd project-softuni-app
    ```
-
-2. **Install dependencies**:
+2. **Restore the Database**:
    ```bash
    npm install
    ```
 
-3. **Start the back end**:
+3. **Install dependencies**:
+   ```bash
+  1.Locate the Database Files Navigate to the folder containing the database dump files: server/resources/forum.
+  2.Run the Restore Command Open a terminal or command prompt and execute the following command:mongorestore -d forum C:\path\to\the\database\files <- (example path) 
+  Replace C:\path\to\the\database\files with the actual path to the folder where the database files are located.
+  Once the command completes successfully, the database named forum will be restored and ready for use by the application
+
+4. **Start the back end**:
    ```bash
    cd server/Rest-api
    npm start
    ```
 
-4. **Start the front end**:
+5. **Start the front end**:
    ```bash
    cd src
    ng serve
    ```
 
-5. **Access the application**:
+6. **Access the application**:
    Open your browser and navigate to `http://localhost:4200`.
 
 ## Functionality
