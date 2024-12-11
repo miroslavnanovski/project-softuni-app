@@ -1,31 +1,87 @@
-# DemoApp
+# Forum and Post Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+A modern and responsive forum and post management system built with Angular for the front end and Node.js/Express with MongoDB for the back end. This project enables users to manage posts, themes, and user profiles with a focus on secure authentication and a clean, modular architecture.
 
-## API server
+## Frameworks and Libraries Used
 
-Open project in terminal/vscode.Run npm install to install dependencies and run npm start afterwards.
+### Front End
+- **Angular**: Framework for building the application.
+- **RxJS**: For handling reactive streams and asynchronous operations.
+- **CSS**: For styling components and making the app responsive.
 
-## Development server
+### Back End
+- **Node.js**: Runtime environment for the back end.
+- **Express.js**: Web framework for creating RESTful APIs.
+- **MongoDB**: NoSQL database for storing application data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Additional Libraries
+- **JWT**: For secure user authentication.
+- **Bcrypt**: For password hashing.
+- **Mongoose**: For object data modeling (ODM) with MongoDB.
 
-## Code scaffolding
+## How to Run the Project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
+- Node.js installed
+- MongoDB installed and running locally
 
-## Build
+### Steps to Run
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/miroslavnanovski/project-softuni-app
+   cd project-softuni-app
+   ```
 
-## Running unit tests
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. **Start the back end**:
+   ```bash
+   cd server/Rest-api
+   npm start
+   ```
 
-## Running end-to-end tests
+4. **Start the front end**:
+   ```bash
+   cd src
+   ng serve
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+5. **Access the application**:
+   Open your browser and navigate to `http://localhost:4200`.
 
-## Further help
+## Functionality
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Authentication**:
+  - User registration and login.
+  - Persistent login with JWT authentication.
+- **Posts**:
+  - Create, view, and manage posts.
+  - Posts are categorized under themes.
+- **Themes**:
+  - Subscribe to themes and view relevant posts.
+  - Create and manage themes.
+- **Profile Management**:
+  - View and edit user profile details.
+  - Change password functionality.
+
+## Architecture
+
+### Front End
+- **Core Components**:
+  - `HeaderComponent`, `FooterComponent`, `AuthenticateComponent`.
+- **Shared Components**:
+  - Loader, error messages, and reusable utilities.
+- **Routing**:
+  - Guards (e.g., `AuthGuard`) protect routes based on user authentication.
+
+### Back End
+- **API**:
+  - Endpoints for managing users, posts, and themes.
+- **Database**:
+  - MongoDB models for structured data storage.
+
+
